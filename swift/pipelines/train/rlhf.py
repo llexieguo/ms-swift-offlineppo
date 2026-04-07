@@ -120,7 +120,7 @@ class SwiftRLHF(SwiftSft):
                 continue
             if key == 'teacher' and args.rlhf_type != 'gkd':
                 continue
-            if key in {'value', 'teacher'} and args.rlhf_type == 'offline_ppo':
+            if key in {'value', 'teacher'} and args.rlhf_type in {'offline_ppo', 'offline_reinforce'}:
                 continue
             model_key = 'reward' if key == 'value' else key
             model_type = getattr(args, f'{model_key}_model_type')
@@ -190,7 +190,14 @@ class SwiftRLHF(SwiftSft):
     def _prepare_template(self) -> None:
         args = self.args
         super()._prepare_template()
-        mode_mapping = {'kto': 'kto', 'gkd': 'train', 'ppo': 'transformers', 'grpo': 'train', 'offline_ppo': 'train'}
+        mode_mapping = {
+            'kto': 'kto',
+            'gkd': 'train',
+            'ppo': 'transformers',
+            'grpo': 'train',
+            'offline_ppo': 'train',
+            'offline_reinforce': 'train',
+        }
         self.template.set_mode(mode_mapping.get(args.rlhf_type, 'rlhf'))
 
         if args.rlhf_type == 'ppo':
@@ -203,6 +210,8 @@ class SwiftRLHF(SwiftSft):
             train_dataset, val_dataset = prepare_kto_dataset(args, train_dataset, val_dataset)
         elif args.rlhf_type == 'offline_ppo':
             train_dataset, val_dataset = self._prepare_offline_ppo_dataset(train_dataset, val_dataset)
+        elif args.rlhf_type == 'offline_reinforce':
+            train_dataset, val_dataset = self._prepare_offline_reinforce_dataset(train_dataset, val_dataset)
         return train_dataset, val_dataset
 
     def _prepare_offline_ppo_dataset(self, train_dataset, val_dataset):
@@ -226,6 +235,77 @@ class SwiftRLHF(SwiftSft):
             val_dataset = val_dataset.map(_add_answer_to_messages)
         return train_dataset, val_dataset
 
+    def _prepare_offline_reinforce_dataset(self, train_dataset, val_dataset):
+        """Prepare dataset for offline REINFORCE++ with group-level advantage computation.
+
+        Groups samples by prompt text, computes advantage = reward - group_mean(reward)
+        for groups with 2+ solutions. Singletons get advantage = 0.
+        """
+        from collections import defaultdict
+        args = self.args
+        answer_key = args.offline_reinforce_answer_key
+        reward_key = args.offline_reinforce_reward_key
+
+        def _add_answer_to_messages(example):
+            answer = example.get(answer_key)
+            if answer is not None:
+                messages = example.get('messages', [])
+                if messages and messages[-1]['role'] != 'assistant':
+                    messages = list(messages)
+                    messages.append({'role': 'assistant', 'content': str(answer)})
+                    example['messages'] = messages
+            return example
+
+        def _compute_group_advantages(dataset):
+            if dataset is None:
+                return dataset
+
+            dataset = dataset.map(_add_answer_to_messages)
+
+            prompt_groups = defaultdict(list)
+            for idx in range(len(dataset)):
+                row = dataset[idx]
+                messages = row.get('messages', [])
+                prompt_parts = []
+                for msg in messages:
+                    if msg['role'] == 'assistant':
+                        break
+                    prompt_parts.append(f"{msg['role']}:{msg['content']}")
+                prompt_key = '||'.join(prompt_parts)
+                prompt_groups[prompt_key].append(idx)
+
+            advantages = [0.0] * len(dataset)
+            n_groups = len(prompt_groups)
+            n_multi = sum(1 for idxs in prompt_groups.values() if len(idxs) > 1)
+            n_singleton = n_groups - n_multi
+
+            for prompt_key, indices in prompt_groups.items():
+                if len(indices) < 2:
+                    continue
+                group_rewards = []
+                for idx in indices:
+                    r = float(dataset[idx].get(reward_key, 0.0))
+                    group_rewards.append(r)
+                group_mean = sum(group_rewards) / len(group_rewards)
+                for idx, r in zip(indices, group_rewards):
+                    advantages[idx] = r - group_mean
+
+            logger.info(
+                f'Offline REINFORCE++ dataset stats: {len(dataset)} samples, '
+                f'{n_groups} unique prompts, {n_multi} groups with 2+ solutions, '
+                f'{n_singleton} singletons (advantage=0)')
+
+            def _set_advantage(example, idx):
+                example['_advantage'] = advantages[idx]
+                return example
+
+            dataset = dataset.map(_set_advantage, with_indices=True)
+            return dataset
+
+        train_dataset = _compute_group_advantages(train_dataset)
+        val_dataset = _compute_group_advantages(val_dataset)
+        return train_dataset, val_dataset
+
     def _prepare_chord_sft_dataset(self):
         # prepare expert sft dataset for chord
         args = self.args
@@ -247,7 +327,7 @@ class SwiftRLHF(SwiftSft):
         for key in ['ref', 'reward', 'value', 'teacher']:
             key = f'{key}_model'
             model = getattr(self, key, None)
-            if self.args.rlhf_type == 'offline_ppo':
+            if self.args.rlhf_type in ('offline_ppo', 'offline_reinforce'):
                 if key == 'ref_model' and model is not None:
                     trainer_kwargs[key] = model
                 continue
@@ -255,6 +335,8 @@ class SwiftRLHF(SwiftSft):
                 trainer_kwargs[key] = model
         if self.args.rlhf_type == 'offline_ppo':
             trainer_kwargs['reward_key'] = self.args.offline_ppo_reward_key
+        if self.args.rlhf_type == 'offline_reinforce':
+            trainer_kwargs['reward_key'] = self.args.offline_reinforce_reward_key
         if hasattr(self, 'reward_template'):
             trainer_kwargs['reward_template'] = self.reward_template
         if self.args.rlhf_type in ['grpo', 'gkd']:

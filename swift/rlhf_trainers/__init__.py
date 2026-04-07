@@ -5,14 +5,15 @@ from swift.utils.import_utils import _LazyModule
 
 if TYPE_CHECKING:
     from .args_mixin import GRPOArgumentsMixin, VllmArguments
-    from .arguments import (CPOConfig, DPOConfig, GKDConfig, GRPOConfig, KTOConfig, OfflinePPOConfig, ORPOConfig,
-                            PPOConfig, RewardConfig)
+    from .arguments import (CPOConfig, DPOConfig, GKDConfig, GRPOConfig, KTOConfig, OfflinePPOConfig,
+                            OfflineReinforceConfig, ORPOConfig, PPOConfig, RewardConfig)
     from .cpo_trainer import CPOTrainer
     from .dpo_trainer import DPOTrainer
     from .gkd_trainer import GKDTrainer
     from .grpo_trainer import GRPOTrainer
     from .kto_trainer import KTOTrainer
     from .offline_ppo_trainer import OfflinePPOTrainer
+    from .offline_reinforce_trainer import OfflineReinforceTrainer
     from .orpo_trainer import ORPOTrainer
     from .ppo_trainer import PPOTrainer
     from .reward_trainer import RewardTrainer
@@ -26,6 +27,7 @@ else:
         'grpo_trainer': ['GRPOTrainer'],
         'kto_trainer': ['KTOTrainer'],
         'offline_ppo_trainer': ['OfflinePPOTrainer'],
+        'offline_reinforce_trainer': ['OfflineReinforceTrainer'],
         'orpo_trainer': ['ORPOTrainer'],
         'ppo_trainer': ['PPOTrainer'],
         'reward_trainer': ['RewardTrainer'],
@@ -35,8 +37,8 @@ else:
         'utils': ['patch_lora_merge', 'patch_lora_unmerge', 'round_robin', '_ForwardRedirection'],
         'vllm_client': ['VLLMClient'],
         'arguments': [
-            'DPOConfig', 'CPOConfig', 'KTOConfig', 'OfflinePPOConfig', 'ORPOConfig', 'PPOConfig', 'RewardConfig',
-            'GRPOConfig', 'GKDConfig'
+            'DPOConfig', 'CPOConfig', 'KTOConfig', 'OfflinePPOConfig', 'OfflineReinforceConfig', 'ORPOConfig',
+            'PPOConfig', 'RewardConfig', 'GRPOConfig', 'GKDConfig'
         ]
     }
 

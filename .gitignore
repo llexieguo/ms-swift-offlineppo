@@ -153,3 +153,6 @@ megatron_output/
 
 # ast template
 ast_index_file.py
+
+
+/Users/lexi/workplace/sgi/ms-swift/examples/train/rlhf/offline_ppo

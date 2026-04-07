@@ -24,6 +24,7 @@ class TrainerFactory:
         'rm': 'swift.rlhf_trainers.RewardTrainer',
         'ppo': 'swift.rlhf_trainers.PPOTrainer',
         'offline_ppo': 'swift.rlhf_trainers.OfflinePPOTrainer',
+        'offline_reinforce': 'swift.rlhf_trainers.OfflineReinforceTrainer',
         'grpo': 'swift.rlhf_trainers.GRPOTrainer',
         'gkd': 'swift.rlhf_trainers.GKDTrainer',
     }
@@ -42,6 +43,7 @@ class TrainerFactory:
         'rm': 'swift.rlhf_trainers.RewardConfig',
         'ppo': 'swift.rlhf_trainers.PPOConfig',
         'offline_ppo': 'swift.rlhf_trainers.OfflinePPOConfig',
+        'offline_reinforce': 'swift.rlhf_trainers.OfflineReinforceConfig',
         'grpo': 'swift.rlhf_trainers.GRPOConfig',
         'gkd': 'swift.rlhf_trainers.GKDConfig',
     }

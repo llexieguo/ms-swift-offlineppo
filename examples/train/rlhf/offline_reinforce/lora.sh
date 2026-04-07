@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
-# Offline PPO Training Script
-# Usage: bash examples/train/rlhf/offline_ppo/lora.sh
+# Offline REINFORCE++ Training Script
+# Usage: bash examples/train/rlhf/offline_reinforce/lora.sh
 # ============================================================
 
 # ======================== 按需修改区 ========================
@@ -13,7 +13,7 @@ MODEL="Qwen/Qwen2.5-VL-7B-Instruct"
 DATASET="/path/to/your/dataset.jsonl"
 
 # 输出目录
-OUTPUT_DIR="output/offline_ppo"
+OUTPUT_DIR="output/offline_reinforce"
 
 # GPU 设置
 CUDA_VISIBLE_DEVICES="0"
@@ -33,11 +33,10 @@ MAX_LENGTH=4096
 LORA_RANK=8
 LORA_ALPHA=32
 
-# 离线 PPO 专有
-KL_COEF=0.2
-CLIPRANGE=0.1
-WHITEN_REWARDS=true
-REWARD_KEY="expected_acc_reward"
+# 离线 REINFORCE++ 专有
+KL_COEF=0.05
+WHITEN_ADVANTAGES=true
+REWARD_KEY="reward"
 ANSWER_KEY="answer"
 
 # 保存 & 日志
@@ -50,14 +49,14 @@ EVAL_RATIO=0.01
 # 日志平台: "tensorboard" 或 "wandb"（可同时用: "tensorboard wandb"）
 REPORT_TO="tensorboard"
 # wandb 设置（仅 REPORT_TO 含 wandb 时生效）
-export WANDB_PROJECT="${WANDB_PROJECT:-offline-ppo}"
+export WANDB_PROJECT="${WANDB_PROJECT:-offline-reinforce}"
 export WANDB_RUN_NAME="${WANDB_RUN_NAME:-}"
 export WANDB_MODE="${WANDB_MODE:-offline}"  # "offline" 离线记录, "online" 实时上传
 
 # ======================== 构建命令 ========================
 
 ARGS=(
-    --rlhf_type offline_ppo
+    --rlhf_type offline_reinforce
     --model "${MODEL}"
     --dataset "${DATASET}"
     --output_dir "${OUTPUT_DIR}"
@@ -82,11 +81,10 @@ ARGS=(
     --eval_strategy ${SAVE_STRATEGY}
     --eval_steps ${SAVE_STEPS}
     --dataloader_num_workers 4
-    --offline_ppo_kl_coef ${KL_COEF}
-    --offline_ppo_cliprange ${CLIPRANGE}
-    --offline_ppo_whiten_rewards ${WHITEN_REWARDS}
-    --offline_ppo_reward_key "${REWARD_KEY}"
-    --offline_ppo_answer_key "${ANSWER_KEY}"
+    --offline_reinforce_kl_coef ${KL_COEF}
+    --offline_reinforce_whiten_advantages ${WHITEN_ADVANTAGES}
+    --offline_reinforce_reward_key "${REWARD_KEY}"
+    --offline_reinforce_answer_key "${ANSWER_KEY}"
     --report_to ${REPORT_TO}
 )
 

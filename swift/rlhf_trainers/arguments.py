@@ -91,6 +91,16 @@ class OfflinePPOConfig(TrainArgumentsMixin, HfTrainingArguments):
 
 
 @dataclass
+class OfflineReinforceConfig(TrainArgumentsMixin, HfTrainingArguments):
+    kl_coef: float = 0.05
+    whiten_advantages: bool = True
+
+    def __post_init__(self):
+        TrainArgumentsMixin.__post_init__(self)
+        HfTrainingArguments.__post_init__(self)
+
+
+@dataclass
 class GKDConfig(RolloutTrainerArgumentsMixin, TrainArgumentsMixin, HfGKDConfig):
     sft_alpha: float = 0
 
