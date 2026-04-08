@@ -214,10 +214,37 @@ class SwiftRLHF(SwiftSft):
             train_dataset, val_dataset = self._prepare_offline_reinforce_dataset(train_dataset, val_dataset)
         return train_dataset, val_dataset
 
+    def _map_weighted_reward_columns(self, dataset, component_keys, weights, out_key: str, log_tag: str):
+        """Overwrite ``out_key`` with sum_i weights[i] * row[component_keys[i]]."""
+        if dataset is None or not component_keys:
+            return dataset
+        ws = weights or [1.0] * len(component_keys)
+
+        def _row(example):
+            total = 0.0
+            for k, w in zip(component_keys, ws):
+                v = example.get(k)
+                try:
+                    total += w * float(v) if v is not None else 0.0
+                except (TypeError, ValueError):
+                    total += 0.0
+            example[out_key] = total
+            return example
+
+        dataset = dataset.map(_row)
+        logger.info(
+            '%s composite reward: %s = %s',
+            log_tag,
+            out_key,
+            ' + '.join(f'{w}*{k}' for k, w in zip(component_keys, ws)),
+        )
+        return dataset
+
     def _prepare_offline_ppo_dataset(self, train_dataset, val_dataset):
         """Append the pre-collected answer as an assistant message to the conversation."""
         args = self.args
         answer_key = args.offline_ppo_answer_key
+        reward_key = args.offline_ppo_reward_key
 
         def _add_answer_to_messages(example):
             answer = example.get(answer_key)
@@ -231,8 +258,22 @@ class SwiftRLHF(SwiftSft):
 
         if train_dataset is not None:
             train_dataset = train_dataset.map(_add_answer_to_messages)
+            train_dataset = self._map_weighted_reward_columns(
+                train_dataset,
+                args.offline_ppo_reward_keys,
+                args.offline_ppo_reward_weights,
+                reward_key,
+                'Offline PPO',
+            )
         if val_dataset is not None:
             val_dataset = val_dataset.map(_add_answer_to_messages)
+            val_dataset = self._map_weighted_reward_columns(
+                val_dataset,
+                args.offline_ppo_reward_keys,
+                args.offline_ppo_reward_weights,
+                reward_key,
+                'Offline PPO',
+            )
         return train_dataset, val_dataset
 
     def _prepare_offline_reinforce_dataset(self, train_dataset, val_dataset):
@@ -256,36 +297,18 @@ class SwiftRLHF(SwiftSft):
                     example['messages'] = messages
             return example
 
-        def _inject_composite_reward(example):
-            """Scalar reward = sum_i w_i * row[key_i]; written to offline_reinforce_reward_key."""
-            comp_keys = args.offline_reinforce_reward_keys
-            if not comp_keys:
-                return example
-            ws = args.offline_reinforce_reward_weights or [1.0] * len(comp_keys)
-            total = 0.0
-            for k, w in zip(comp_keys, ws):
-                v = example.get(k)
-                try:
-                    total += w * float(v) if v is not None else 0.0
-                except (TypeError, ValueError):
-                    total += 0.0
-            example[reward_key] = total
-            return example
-
         def _compute_group_advantages(dataset):
             if dataset is None:
                 return dataset
 
             dataset = dataset.map(_add_answer_to_messages)
-            if args.offline_reinforce_reward_keys:
-                dataset = dataset.map(_inject_composite_reward)
-                ck = args.offline_reinforce_reward_keys
-                cw = args.offline_reinforce_reward_weights or [1.0] * len(ck)
-                logger.info(
-                    'Offline REINFORCE++ composite reward: %s = sum(%s)',
-                    reward_key,
-                    ' + '.join(f'{w}*{k}' for k, w in zip(ck, cw)),
-                )
+            dataset = self._map_weighted_reward_columns(
+                dataset,
+                args.offline_reinforce_reward_keys,
+                args.offline_reinforce_reward_weights,
+                reward_key,
+                'Offline REINFORCE++',
+            )
 
             prompt_groups = defaultdict(list)
             for idx in range(len(dataset)):

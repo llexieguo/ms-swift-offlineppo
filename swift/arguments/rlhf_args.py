@@ -129,16 +129,23 @@ class OfflinePPOArguments:
         offline_ppo_kl_coef (float): KL penalty coefficient against the reference model. Defaults to 0.05.
         offline_ppo_cliprange (float): PPO clipping range for the importance sampling ratio. Defaults to 0.2.
         offline_ppo_whiten_rewards (bool): Whether to normalize rewards (zero mean, unit variance). Defaults to True.
-        offline_ppo_reward_key (str): The key in the dataset that contains the pre-computed reward. Defaults to
-            'expected_acc_reward'.
+        offline_ppo_reward_key (str): Column name used as the scalar reward for training. If ``offline_ppo_reward_keys``
+            is set, this column is **overwritten** on load with the weighted sum (defaults to 'expected_acc_reward').
         offline_ppo_answer_key (str): The key in the dataset that contains the pre-collected response. Defaults to
             'answer'.
+        offline_ppo_reward_keys (Optional[List[str]]): If set, scalar reward =
+            ``sum_i offline_ppo_reward_weights[i] * row[offline_ppo_reward_keys[i]]`` (missing keys treated as 0).
+            If ``None``, use the single column ``offline_ppo_reward_key``.
+        offline_ppo_reward_weights (Optional[List[float]]): Weights for ``offline_ppo_reward_keys``. If ``None``, all
+            weights are 1.0.
     """
     offline_ppo_kl_coef: float = 0.05
     offline_ppo_cliprange: float = 0.2
     offline_ppo_whiten_rewards: bool = True
     offline_ppo_reward_key: str = 'expected_acc_reward'
     offline_ppo_answer_key: str = 'answer'
+    offline_ppo_reward_keys: Optional[List[str]] = None
+    offline_ppo_reward_weights: Optional[List[float]] = None
 
 
 @dataclass
@@ -396,6 +403,19 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
             return
         self.remove_unused_columns = False
         logger.info(f'Setting args.remove_unused_columns: {self.remove_unused_columns}')
+        rk = self.offline_ppo_reward_keys
+        if isinstance(rk, str):
+            self.offline_ppo_reward_keys = [x.strip() for x in rk.split(',') if x.strip()]
+            rk = self.offline_ppo_reward_keys
+        if rk:
+            rw = self.offline_ppo_reward_weights
+            if isinstance(rw, str):
+                self.offline_ppo_reward_weights = [float(x.strip()) for x in rw.split(',') if x.strip()]
+                rw = self.offline_ppo_reward_weights
+            if rw is not None and len(rw) != len(rk):
+                raise ValueError(
+                    f'offline_ppo_reward_weights length ({len(rw)}) must match '
+                    f'offline_ppo_reward_keys ({len(rk)}).')
 
     def _init_offline_reinforce(self):
         if self.rlhf_type != 'offline_reinforce':
