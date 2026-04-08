@@ -256,11 +256,36 @@ class SwiftRLHF(SwiftSft):
                     example['messages'] = messages
             return example
 
+        def _inject_composite_reward(example):
+            """Scalar reward = sum_i w_i * row[key_i]; written to offline_reinforce_reward_key."""
+            comp_keys = args.offline_reinforce_reward_keys
+            if not comp_keys:
+                return example
+            ws = args.offline_reinforce_reward_weights or [1.0] * len(comp_keys)
+            total = 0.0
+            for k, w in zip(comp_keys, ws):
+                v = example.get(k)
+                try:
+                    total += w * float(v) if v is not None else 0.0
+                except (TypeError, ValueError):
+                    total += 0.0
+            example[reward_key] = total
+            return example
+
         def _compute_group_advantages(dataset):
             if dataset is None:
                 return dataset
 
             dataset = dataset.map(_add_answer_to_messages)
+            if args.offline_reinforce_reward_keys:
+                dataset = dataset.map(_inject_composite_reward)
+                ck = args.offline_reinforce_reward_keys
+                cw = args.offline_reinforce_reward_weights or [1.0] * len(ck)
+                logger.info(
+                    'Offline REINFORCE++ composite reward: %s = sum(%s)',
+                    reward_key,
+                    ' + '.join(f'{w}*{k}' for k, w in zip(ck, cw)),
+                )
 
             prompt_groups = defaultdict(list)
             for idx in range(len(dataset)):

@@ -149,15 +149,24 @@ class OfflineReinforceArguments:
         offline_reinforce_kl_coef (float): KL penalty coefficient against the reference model. Defaults to 0.05.
         offline_reinforce_whiten_advantages (bool): Whether to normalize advantages by their std at batch level.
             Defaults to True.
-        offline_reinforce_reward_key (str): The key in the dataset that contains the pre-computed reward.
-            Defaults to 'reward'.
+        offline_reinforce_reward_key (str): Column name whose **value is used as the scalar reward** for grouping
+            and logging. If ``offline_reinforce_reward_keys`` is set, this column is **overwritten** on load with the
+            weighted sum (defaults to 'reward').
         offline_reinforce_answer_key (str): The key in the dataset that contains the pre-collected response.
             Defaults to 'answer'.
+        offline_reinforce_reward_keys (Optional[List[str]]): If set, scalar reward =
+            ``sum_i offline_reinforce_reward_weights[i] * row[offline_reinforce_reward_keys[i]]`` (missing keys
+            treated as 0). Example: keys ``acc``, ``llm_acc``, ``llm_score`` with weights ``1``, ``0.5``, ``1`` gives
+            ``acc + 0.5 * llm_acc + llm_score``. If ``None``, use the single column ``offline_reinforce_reward_key``.
+        offline_reinforce_reward_weights (Optional[List[float]]): Weights for ``offline_reinforce_reward_keys``. If
+            ``None``, all weights are 1.0.
     """
     offline_reinforce_kl_coef: float = 0.05
     offline_reinforce_whiten_advantages: bool = True
     offline_reinforce_reward_key: str = 'reward'
     offline_reinforce_answer_key: str = 'answer'
+    offline_reinforce_reward_keys: Optional[List[str]] = None
+    offline_reinforce_reward_weights: Optional[List[float]] = None
 
 
 @dataclass
@@ -393,6 +402,19 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
             return
         self.remove_unused_columns = False
         logger.info(f'Setting args.remove_unused_columns: {self.remove_unused_columns}')
+        rk = self.offline_reinforce_reward_keys
+        if isinstance(rk, str):
+            self.offline_reinforce_reward_keys = [x.strip() for x in rk.split(',') if x.strip()]
+            rk = self.offline_reinforce_reward_keys
+        if rk:
+            rw = self.offline_reinforce_reward_weights
+            if isinstance(rw, str):
+                self.offline_reinforce_reward_weights = [float(x.strip()) for x in rw.split(',') if x.strip()]
+                rw = self.offline_reinforce_reward_weights
+            if rw is not None and len(rw) != len(rk):
+                raise ValueError(
+                    f'offline_reinforce_reward_weights length ({len(rw)}) must match '
+                    f'offline_reinforce_reward_keys ({len(rk)}).')
 
     def _init_grpo(self):
         if self.rlhf_type != 'grpo':
