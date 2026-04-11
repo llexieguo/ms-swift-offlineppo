@@ -37,8 +37,12 @@ LORA_ALPHA=32
 KL_COEF=0.2
 CLIPRANGE=0.1
 WHITEN_REWARDS=true
+# 标量 reward 列名（若设 REWARD_KEYS 则该列会被加权组合覆盖）
 REWARD_KEY="expected_acc_reward"
 ANSWER_KEY="answer"
+# 组合 reward（可选）：列名与权重逗号分隔，例如 acc + 0.5*llm_acc + llm_score
+# REWARD_KEYS="acc,llm_acc,llm_score"
+# REWARD_WEIGHTS="1,0.5,1"
 
 # 保存 & 日志
 SAVE_STRATEGY="epoch"       # "epoch" 按轮保存, "steps" 按步保存
@@ -89,6 +93,13 @@ ARGS=(
     --offline_ppo_answer_key "${ANSWER_KEY}"
     --report_to ${REPORT_TO}
 )
+
+if [ -n "${REWARD_KEYS:-}" ]; then
+    ARGS+=(--offline_ppo_reward_keys "${REWARD_KEYS}")
+fi
+if [ -n "${REWARD_WEIGHTS:-}" ]; then
+    ARGS+=(--offline_ppo_reward_weights "${REWARD_WEIGHTS}")
+fi
 
 # LoRA 模式追加参数
 if [ "${TUNER_TYPE}" = "lora" ]; then

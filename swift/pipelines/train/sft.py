@@ -13,6 +13,7 @@ from swift.trainers import TrainerFactory
 from swift.utils import append_to_jsonl, get_logger, get_model_parameter_info, is_master, plot_images, stat_array
 from ..base import SwiftPipeline
 from ..utils import get_cached_dataset
+from .dataset_transform import apply_ppo_data_transform
 from .tuner import TunerMixin
 
 logger = get_logger()
@@ -86,11 +87,14 @@ class SwiftSft(SwiftPipeline, TunerMixin):
                 split_dataset_ratio=args.split_dataset_ratio,
                 shuffle=args.dataset_shuffle,
                 **dataset_kwargs)
+            train_dataset = apply_ppo_data_transform(train_dataset, args, split='train')
+            val_dataset = apply_ppo_data_transform(val_dataset, args, split='val')
         if len(args.val_dataset) > 0:
             # Loading val dataset
             dataset_kwargs.pop('interleave_prob', None)
             _, val_dataset = load_dataset(
                 args.val_dataset, split_dataset_ratio=1.0, shuffle=args.val_dataset_shuffle, **dataset_kwargs)
+            val_dataset = apply_ppo_data_transform(val_dataset, args, split='val')
             assert args.split_dataset_ratio == 0.
         if args.truncation_strategy == 'split':
             logger.info(f'train_dataset: {train_dataset}')

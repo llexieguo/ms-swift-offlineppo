@@ -36,8 +36,17 @@ LORA_ALPHA=32
 # 离线 REINFORCE++ 专有
 KL_COEF=0.05
 WHITEN_ADVANTAGES=true
+# 用 rank-based advantage（只保留组内排序，忽略分数大小）
+# true: winner=+0.5 / loser=-0.5 / tie=0; false: r - group_mean（默认）
+USE_RANK_ADVANTAGE=false
+# 最终参与训练/分组的标量存在 REWARD_KEY 这一列（可被组合覆盖）
 REWARD_KEY="reward"
 ANSWER_KEY="answer"
+# 组合 reward（可选）：设为列名逗号分隔与权重逗号分隔，等价于
+#   REWARD_KEY = 1*acc + 0.5*llm_acc + 1*llm_score
+# 留空则直接用数据里已有的 REWARD_KEY 一列
+# REWARD_KEYS="acc,llm_acc,llm_score"
+# REWARD_WEIGHTS="1,0.5,1"
 
 # 保存 & 日志
 SAVE_STRATEGY="epoch"       # "epoch" 按轮保存, "steps" 按步保存
@@ -83,10 +92,18 @@ ARGS=(
     --dataloader_num_workers 4
     --offline_reinforce_kl_coef ${KL_COEF}
     --offline_reinforce_whiten_advantages ${WHITEN_ADVANTAGES}
+    --offline_reinforce_use_rank_advantage ${USE_RANK_ADVANTAGE}
     --offline_reinforce_reward_key "${REWARD_KEY}"
     --offline_reinforce_answer_key "${ANSWER_KEY}"
     --report_to ${REPORT_TO}
 )
+
+if [ -n "${REWARD_KEYS:-}" ]; then
+    ARGS+=(--offline_reinforce_reward_keys "${REWARD_KEYS}")
+fi
+if [ -n "${REWARD_WEIGHTS:-}" ]; then
+    ARGS+=(--offline_reinforce_reward_weights "${REWARD_WEIGHTS}")
+fi
 
 # LoRA 模式追加参数
 if [ "${TUNER_TYPE}" = "lora" ]; then

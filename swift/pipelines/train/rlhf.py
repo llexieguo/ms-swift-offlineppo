@@ -327,6 +327,7 @@ class SwiftRLHF(SwiftSft):
             n_multi = sum(1 for idxs in prompt_groups.values() if len(idxs) > 1)
             n_singleton = n_groups - n_multi
 
+            use_rank = getattr(args, 'offline_reinforce_use_rank_advantage', False)
             for prompt_key, indices in prompt_groups.items():
                 if len(indices) < 2:
                     continue
@@ -334,9 +335,23 @@ class SwiftRLHF(SwiftSft):
                 for idx in indices:
                     r = float(dataset[idx].get(reward_key, 0.0))
                     group_rewards.append(r)
-                group_mean = sum(group_rewards) / len(group_rewards)
-                for idx, r in zip(indices, group_rewards):
-                    advantages[idx] = r - group_mean
+                if use_rank:
+                    # Rank-based advantage: rank / (G-1) - 0.5, ties → 0
+                    # For G=2: winner=+0.5, loser=-0.5, tie=0
+                    G = len(group_rewards)
+                    sorted_rewards = sorted(set(group_rewards))
+                    if len(sorted_rewards) == 1:
+                        # all tied → no signal
+                        for idx in indices:
+                            advantages[idx] = 0.0
+                    else:
+                        reward_to_rank = {r: i for i, r in enumerate(sorted_rewards)}
+                        for idx, r in zip(indices, group_rewards):
+                            advantages[idx] = reward_to_rank[r] / (G - 1) - 0.5
+                else:
+                    group_mean = sum(group_rewards) / len(group_rewards)
+                    for idx, r in zip(indices, group_rewards):
+                        advantages[idx] = r - group_mean
 
             logger.info(
                 f'Offline REINFORCE++ dataset stats: {len(dataset)} samples, '

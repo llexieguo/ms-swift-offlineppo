@@ -181,6 +181,15 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
     # fsdp
     fsdp: Optional[str] = None
 
+    # load-time PPO-style dataset transform
+    ppo_data_transform: Literal['none', 'sft', 'dpo', 'opsd'] = 'none'
+    ppo_data_answer_key: str = 'answer'
+    ppo_data_judge_key: str = 'expected_acc_reward'
+    ppo_data_judge_threshold: float = 0.5
+    ppo_data_score_keys: Optional[str] = None
+    ppo_data_score_weights: Optional[str] = None
+    ppo_data_teacher_prompt: Optional[str] = None
+
     def _check_padding_free(self):
         if self.padding_free or self.packing:
             if self.packing:
@@ -205,6 +214,7 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
         self._init_override()
         TunerArguments.__post_init__(self)
         self._check_padding_free()
+        self._init_ppo_data_transform()
         if self.optimizer is None:
             if self.lorap_lr_ratio:
                 self.optimizer = 'lorap'
@@ -242,6 +252,29 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
             else:
                 self.learning_rate = 1e-4
         self._init_eval_strategy()
+
+    def _init_ppo_data_transform(self):
+        if self.ppo_data_score_keys is not None:
+            if isinstance(self.ppo_data_score_keys, str):
+                score_keys = [key.strip() for key in self.ppo_data_score_keys.split(',') if key.strip()]
+            else:
+                score_keys = [str(key).strip() for key in self.ppo_data_score_keys if str(key).strip()]
+            if not score_keys:
+                raise ValueError('`ppo_data_score_keys` must contain at least one key.')
+            self.ppo_data_score_keys = score_keys
+            if self.ppo_data_score_weights is not None:
+                if isinstance(self.ppo_data_score_weights, str):
+                    score_weights = [float(weight.strip()) for weight in self.ppo_data_score_weights.split(',')
+                                     if weight.strip()]
+                else:
+                    score_weights = [float(weight) for weight in self.ppo_data_score_weights]
+                if len(score_weights) != len(score_keys):
+                    raise ValueError(
+                        f'`ppo_data_score_weights` length ({len(score_weights)}) must match '
+                        f'`ppo_data_score_keys` ({len(score_keys)}).')
+                self.ppo_data_score_weights = score_weights
+        elif self.ppo_data_score_weights is not None:
+            raise ValueError('`ppo_data_score_weights` requires `ppo_data_score_keys`.')
 
     def _init_deepspeed(self):
         if self.deepspeed:
