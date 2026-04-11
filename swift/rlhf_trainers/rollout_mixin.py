@@ -135,14 +135,17 @@ class RolloutTrainerMixin(RLHFTrainerMixin):
         self.enable_server_multi_turn = False
         self.rollout_enable_lora = False
         self.vllm_use_async_engine = False
-        self.vllm_version_ge_0_10_2 = check_vllm_version_ge('0.10.2')
-        self.disable_rollout_importance_sampling = not self.vllm_version_ge_0_10_2
+        self.vllm_version_ge_0_10_2 = False
+        self.disable_rollout_importance_sampling = True
         if not args.use_vllm:
             return
 
         if not is_vllm_available():
             raise ImportError('vLLM is not available and `use_vllm` is set to True. '
                               'Please install vLLM with `pip install vllm -U` to use it.')
+
+        self.vllm_version_ge_0_10_2 = check_vllm_version_ge('0.10.2')
+        self.disable_rollout_importance_sampling = not self.vllm_version_ge_0_10_2
 
         if not self.vllm_version_ge_0_10_2 and getattr(self.args, 'rollout_importance_sampling_mode', None) is not None:
             raise ValueError('rollout_importance_sampling_mode is not supported in vLLM version < 0.10.2, '

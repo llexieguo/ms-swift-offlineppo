@@ -194,7 +194,7 @@ class MegatronRolloutMixin:
         self.use_vllm = args.use_vllm
         self.vllm_use_async_engine = False
         self.enable_offload = False
-        self.vllm_version_ge_0_10_2 = check_vllm_version_ge('0.10.2')
+        self.vllm_version_ge_0_10_2 = False
 
         if not args.use_vllm:
             return
@@ -205,6 +205,8 @@ class MegatronRolloutMixin:
         if not is_vllm_available():
             raise ImportError('vLLM is not available and `use_vllm` is set to True. '
                               'Please install vLLM with `pip install vllm -U` to use it.')
+
+        self.vllm_version_ge_0_10_2 = check_vllm_version_ge('0.10.2')
 
         if self.vllm_mode == 'server':
             # Server mode uses external vLLM server
