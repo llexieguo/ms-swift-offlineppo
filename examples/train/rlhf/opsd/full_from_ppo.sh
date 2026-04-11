@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
 # OPSD Training Script From PPO-Style Samples
-# Usage: bash examples/train/rlhf/opsd/opsd.sh
+# Usage: bash examples/train/rlhf/opsd/full_from_ppo.sh
 # ============================================================
 
 # ======================== 按需修改区 ========================
@@ -20,7 +20,7 @@ CUDA_VISIBLE_DEVICES="0"
 NPROC_PER_NODE=1
 
 # 训练模式: "lora" 或 "full"
-TUNER_TYPE="lora"
+TUNER_TYPE="full"
 
 # 训练超参
 MAX_STEPS=1000

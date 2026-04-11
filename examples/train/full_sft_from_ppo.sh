@@ -1,7 +1,7 @@
 #!/bin/bash
 # ============================================================
-# DPO Training Script From PPO-Style Samples
-# Usage: bash examples/train/rlhf/dpo/lora.sh
+# SFT Training Script From PPO-Style Samples
+# Usage: bash examples/train/full_sft_from_ppo.sh
 # ============================================================
 
 # ======================== 按需修改区 ========================
@@ -13,14 +13,14 @@ MODEL="Qwen/Qwen2.5-7B-Instruct"
 DATASET="/path/to/your/ppo_samples.jsonl"
 
 # 输出目录
-OUTPUT_DIR="output/dpo_from_ppo"
+OUTPUT_DIR="output/sft_from_ppo"
 
 # GPU 设置
 CUDA_VISIBLE_DEVICES="0"
 NPROC_PER_NODE=1
 
 # 训练模式: "lora" 或 "full"
-TUNER_TYPE="lora"
+TUNER_TYPE="full"
 
 # 训练超参
 NUM_EPOCHS=1
@@ -33,15 +33,10 @@ MAX_LENGTH=2048
 LORA_RANK=8
 LORA_ALPHA=32
 
-# PPO 风格数据 -> DPO 偏好对
+# PPO 风格数据 -> SFT
 ANSWER_KEY="answer"
-# 同一个 prompt 下，按以下加权分数排序，最高分做 chosen，最低分做 rejected
-# 例如: expect_acc + 0.1 * llm_score
-SCORE_KEYS="expect_acc,llm_score"
-SCORE_WEIGHTS="1,0.1"
-
-# DPO 专有
-RPO_ALPHA=0.1
+JUDGE_KEY="expect_acc"
+JUDGE_THRESHOLD=0.5
 
 # 保存 & 日志
 SAVE_STRATEGY="steps"
@@ -52,14 +47,16 @@ EVAL_RATIO=0.01
 
 # 日志平台: "tensorboard" 或 "wandb"（可同时用: "tensorboard wandb"）
 REPORT_TO="tensorboard"
-export WANDB_PROJECT="${WANDB_PROJECT:-dpo-from-ppo}"
+export WANDB_PROJECT="${WANDB_PROJECT:-sft-from-ppo}"
 export WANDB_RUN_NAME="${WANDB_RUN_NAME:-}"
 export WANDB_MODE="${WANDB_MODE:-offline}"
+
+# 可选 system
+SYSTEM_PROMPT="You are a helpful assistant."
 
 # ======================== 构建命令 ========================
 
 ARGS=(
-    --rlhf_type dpo
     --model "${MODEL}"
     --dataset "${DATASET}"
     --output_dir "${OUTPUT_DIR}"
@@ -71,25 +68,22 @@ ARGS=(
     --learning_rate ${LEARNING_RATE}
     --lr_scheduler_type cosine
     --gradient_accumulation_steps ${GRAD_ACCUM}
-    --gradient_checkpointing true
     --max_length ${MAX_LENGTH}
-    --warmup_ratio 0.05
     --save_strategy ${SAVE_STRATEGY}
     --save_steps ${SAVE_STEPS}
     --save_total_limit ${SAVE_TOTAL_LIMIT}
-    --save_only_model true
     --logging_steps ${LOGGING_STEPS}
     --split_dataset_ratio ${EVAL_RATIO}
     --eval_strategy ${SAVE_STRATEGY}
     --eval_steps ${SAVE_STEPS}
     --dataloader_num_workers 4
     --dataset_num_proc 4
-    --load_from_cache_file true
-    --rpo_alpha ${RPO_ALPHA}
-    --ppo_data_transform dpo
+    --warmup_ratio 0.05
+    --ppo_data_transform sft
     --ppo_data_answer_key "${ANSWER_KEY}"
-    --ppo_data_score_keys "${SCORE_KEYS}"
-    --ppo_data_score_weights "${SCORE_WEIGHTS}"
+    --ppo_data_judge_key "${JUDGE_KEY}"
+    --ppo_data_judge_threshold ${JUDGE_THRESHOLD}
+    --system "${SYSTEM_PROMPT}"
     --report_to ${REPORT_TO}
 )
 
@@ -106,4 +100,4 @@ fi
 
 CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES} \
 NPROC_PER_NODE=${NPROC_PER_NODE} \
-swift rlhf "${ARGS[@]}"
+swift sft "${ARGS[@]}"
