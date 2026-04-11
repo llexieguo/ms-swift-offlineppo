@@ -80,6 +80,8 @@ class SwiftSft(SwiftPipeline, TunerMixin):
         # The random shuffling of the training set occurs in the dataloader of the trainer.
         args = self.args
         dataset_kwargs = args.get_dataset_kwargs()
+        if getattr(args, 'ppo_data_transform', 'none') != 'none':
+            dataset_kwargs['remove_unused_columns'] = False
         train_dataset, val_dataset = None, None
         if args.dataset:
             train_dataset, val_dataset = load_dataset(
@@ -110,6 +112,24 @@ class SwiftSft(SwiftPipeline, TunerMixin):
             append_to_jsonl(val_dataset_path, val_dataset.to_list())
             logger.info(f'The split dataset from the training set will be saved at: {val_dataset_path}.')
 
+    def _normalize_empty_datasets(self, train_dataset, val_dataset):
+        args = self.args
+        if isinstance(train_dataset, HfDataset) and len(train_dataset) == 0:
+            if getattr(args, 'ppo_data_transform', 'none') != 'none':
+                raise ValueError(
+                    'The training dataset is empty after `ppo_data_transform`. '
+                    f'transform={args.ppo_data_transform}, '
+                    f'answer_key={args.ppo_data_answer_key}, '
+                    f'judge_key={args.ppo_data_judge_key}, '
+                    f'judge_threshold={args.ppo_data_judge_threshold}. '
+                    'Please check whether the score column name is correct, whether the threshold is too high, '
+                    'or whether the answer column is missing.')
+            raise ValueError('The training dataset is empty.')
+        if isinstance(val_dataset, HfDataset) and len(val_dataset) == 0:
+            logger.warning('Validation dataset is empty after preprocessing, skip evaluation dataset.')
+            val_dataset = None
+        return train_dataset, val_dataset
+
     @RayHelper.function(group='default')
     def _prepare_dataset(self):
         args = self.args
@@ -129,6 +149,7 @@ class SwiftSft(SwiftPipeline, TunerMixin):
                 val_datasets.append(val_dataset)
         train_dataset = DatasetLoader.concat_datasets(train_datasets)
         val_dataset = DatasetLoader.concat_datasets(val_datasets)
+        train_dataset, val_dataset = self._normalize_empty_datasets(train_dataset, val_dataset)
         if args.truncation_strategy != 'split':
             logger.info(f'train_dataset: {train_dataset}')
             logger.info(f'val_dataset: {val_dataset}')
@@ -147,6 +168,11 @@ class SwiftSft(SwiftPipeline, TunerMixin):
         for i, dataset in enumerate(datasets):
             if dataset is None:
                 continue
+            if hasattr(dataset, '__len__') and len(dataset) == 0:
+                datasets[i] = None if i == 1 else dataset
+                if i == 1:
+                    logger.warning('Validation dataset is empty, skip lazy tokenization.')
+                    continue
             if i == 1 and predict_with_generate:
                 # val_dataset
                 continue
