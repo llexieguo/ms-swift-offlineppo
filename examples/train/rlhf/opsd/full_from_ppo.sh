@@ -23,7 +23,7 @@ NPROC_PER_NODE=1
 TUNER_TYPE="full"
 
 # 训练超参
-MAX_STEPS=1000
+NUM_EPOCHS=1
 LEARNING_RATE=2e-5
 BATCH_SIZE=4
 GRAD_ACCUM=1
@@ -38,8 +38,13 @@ LORA_ALPHA=128
 ANSWER_KEY="answer"
 JUDGE_KEY="expect_acc"
 JUDGE_THRESHOLD=0.5
+# 可选：标准答案列名，例如 final_answer / gt_answer
+LABEL_KEY=""
+# 是否把标准答案也提供给 teacher
+INCLUDE_LABEL_IN_TEACHER_PROMPT=false
 # 可选：自定义 teacher prompt 模板，可用 {prompt} 和 {answer}
-# TEACHER_PROMPT='{prompt}\n\nCandidate answer:\n{answer}\n\nVerify it and produce your own reasoning.'
+# 如果开启标准答案，也可在模板里使用 {label}
+# TEACHER_PROMPT='{prompt}\n\nCandidate answer:\n{answer}\n\nGround-truth answer:\n{label}'
 
 # GKD / OPSD 专有
 TEACHER_MODEL="${MODEL}"
@@ -54,6 +59,9 @@ VLLM_MODE="colocate"
 VLLM_GPU_MEMORY_UTILIZATION=0.7
 VLLM_MAX_MODEL_LEN=10240
 SLEEP_LEVEL=1
+
+# 训练侧 attention 实现。即使使用 vLLM rollout，也可以把训练侧改成 sdpa。
+ATTN_IMPL="sdpa"
 
 # 保存 & 日志
 SAVE_STEPS=100
@@ -74,7 +82,7 @@ ARGS=(
     --teacher_model "${TEACHER_MODEL}"
     --tuner_type "${TUNER_TYPE}"
     --torch_dtype bfloat16
-    --max_steps ${MAX_STEPS}
+    --num_train_epochs ${NUM_EPOCHS}
     --per_device_train_batch_size ${BATCH_SIZE}
     --gradient_accumulation_steps ${GRAD_ACCUM}
     --learning_rate ${LEARNING_RATE}
@@ -86,7 +94,7 @@ ARGS=(
     --save_only_model true
     --gradient_checkpointing true
     --deepspeed zero0
-    --attn_impl flash_attn
+    --attn_impl "${ATTN_IMPL}"
     --lmbda ${LMBDA}
     --beta ${BETA}
     --temperature ${TEMPERATURE}
@@ -95,6 +103,7 @@ ARGS=(
     --ppo_data_answer_key "${ANSWER_KEY}"
     --ppo_data_judge_key "${JUDGE_KEY}"
     --ppo_data_judge_threshold ${JUDGE_THRESHOLD}
+    --ppo_data_include_label_in_teacher_prompt ${INCLUDE_LABEL_IN_TEACHER_PROMPT}
     --report_to ${REPORT_TO}
 )
 
@@ -110,6 +119,10 @@ fi
 
 if [ -n "${TEACHER_PROMPT:-}" ]; then
     ARGS+=(--ppo_data_teacher_prompt "${TEACHER_PROMPT}")
+fi
+
+if [ -n "${LABEL_KEY:-}" ]; then
+    ARGS+=(--ppo_data_label_key "${LABEL_KEY}")
 fi
 
 # LoRA 模式追加参数

@@ -18,11 +18,22 @@ DEFAULT_OPSD_TEACHER_PROMPT = (
     'Please carefully verify it, then articulate your own reasoning and final answer.'
 )
 
+DEFAULT_OPSD_TEACHER_PROMPT_WITH_LABEL = (
+    '{prompt}\n\n'
+    'Here is a candidate answer that may be correct:\n'
+    '{answer}\n\n'
+    'The ground-truth answer is:\n'
+    '{label}\n\n'
+    'Please carefully verify the candidate answer against the ground-truth answer, '
+    'then articulate your own reasoning and final answer.'
+)
+
 
 @dataclass
 class _PreparedSample:
     prompt_messages: List[Dict[str, Any]]
     answer: Optional[str]
+    label: Optional[str]
     judge_score: Optional[float]
     rank_score: Optional[float]
     base_row: Dict[str, Any]
@@ -69,7 +80,8 @@ def _transform_to_sft(dataset: HfDataset, args, *, split: str) -> HfDataset:
 def _transform_to_opsd(dataset: HfDataset, args, *, split: str) -> HfDataset:
     rows = []
     dropped = 0
-    teacher_template = getattr(args, 'ppo_data_teacher_prompt', None) or DEFAULT_OPSD_TEACHER_PROMPT
+    include_label = getattr(args, 'ppo_data_include_label_in_teacher_prompt', False)
+    teacher_template = getattr(args, 'ppo_data_teacher_prompt', None)
     for row in dataset:
         sample = _prepare_sample(row, args)
         if sample.answer is None or not _passes_threshold(sample.judge_score, args):
@@ -80,7 +92,8 @@ def _transform_to_opsd(dataset: HfDataset, args, *, split: str) -> HfDataset:
             continue
         item = dict(sample.base_row)
         item['messages'] = sample.prompt_messages
-        item['teacher_prompt'] = teacher_template.format(prompt=sample.prompt_text, answer=sample.answer)
+        item['teacher_prompt'] = _build_opsd_teacher_prompt(
+            sample=sample, teacher_template=teacher_template, include_label=include_label)
         rows.append(item)
     logger.info(
         'PPO data transform (%s -> OPSD): kept %s / %s samples.',
@@ -94,10 +107,17 @@ def _transform_to_opsd(dataset: HfDataset, args, *, split: str) -> HfDataset:
 def _transform_to_dpo(dataset: HfDataset, args, *, split: str) -> HfDataset:
     grouped: Dict[str, List[_PreparedSample]] = {}
     skipped = 0
+    skipped_missing_answer = 0
+    skipped_missing_score = 0
     for row in dataset:
         sample = _prepare_sample(row, args)
-        if sample.answer is None or sample.rank_score is None:
+        if sample.answer is None:
             skipped += 1
+            skipped_missing_answer += 1
+            continue
+        if sample.rank_score is None:
+            skipped += 1
+            skipped_missing_score += 1
             continue
         grouped.setdefault(sample.prompt_key, []).append(sample)
 
@@ -119,12 +139,14 @@ def _transform_to_dpo(dataset: HfDataset, args, *, split: str) -> HfDataset:
         rows.append(item)
 
     logger.info(
-        'PPO data transform (%s -> DPO): built %s pairs from %s prompts, skipped %s raw samples and %s prompts '
-        'without valid pairs.',
+        'PPO data transform (%s -> DPO): built %s pairs from %s prompts, skipped %s raw samples '
+        '(missing answer: %s, missing score: %s) and %s prompts without valid pairs.',
         split,
         len(rows),
         len(grouped),
         skipped,
+        skipped_missing_answer,
+        skipped_missing_score,
         no_pair,
     )
     return _build_dataset(rows, dataset)
@@ -132,6 +154,7 @@ def _transform_to_dpo(dataset: HfDataset, args, *, split: str) -> HfDataset:
 
 def _prepare_sample(row: Dict[str, Any], args) -> _PreparedSample:
     prompt_messages, answer = _split_prompt_and_answer(row, getattr(args, 'ppo_data_answer_key', 'answer'))
+    label = _maybe_stringify(row.get(getattr(args, 'ppo_data_label_key', None)))
     judge_score = _safe_float(row.get(getattr(args, 'ppo_data_judge_key', 'expected_acc_reward')))
     score_keys = getattr(args, 'ppo_data_score_keys', None) or [getattr(args, 'ppo_data_judge_key',
                                                                           'expected_acc_reward')]
@@ -149,6 +172,7 @@ def _prepare_sample(row: Dict[str, Any], args) -> _PreparedSample:
     return _PreparedSample(
         prompt_messages=prompt_messages,
         answer=answer,
+        label=label,
         judge_score=judge_score,
         rank_score=rank_score,
         base_row=_build_base_row(row),
@@ -176,6 +200,16 @@ def _split_prompt_and_answer(row: Dict[str, Any], answer_key: str):
     if answer is not None:
         answer = str(answer)
     return messages, answer
+
+
+def _build_opsd_teacher_prompt(*, sample: _PreparedSample, teacher_template: Optional[str], include_label: bool) -> str:
+    label = sample.label if include_label and sample.label is not None else ''
+    if teacher_template is None:
+        if label:
+            teacher_template = DEFAULT_OPSD_TEACHER_PROMPT_WITH_LABEL
+        else:
+            teacher_template = DEFAULT_OPSD_TEACHER_PROMPT
+    return teacher_template.format(prompt=sample.prompt_text, answer=sample.answer, label=label)
 
 
 def _passes_threshold(value: Optional[float], args) -> bool:
@@ -206,6 +240,12 @@ def _safe_float(value: Any) -> Optional[float]:
         return float(value)
     except (TypeError, ValueError):
         return None
+
+
+def _maybe_stringify(value: Any) -> Optional[str]:
+    if value is None:
+        return None
+    return str(value)
 
 
 def _build_dataset(rows: List[Dict[str, Any]], dataset: HfDataset) -> HfDataset:

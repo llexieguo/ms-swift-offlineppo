@@ -14,6 +14,8 @@ def _build_args(**kwargs):
         'ppo_data_score_keys': None,
         'ppo_data_score_weights': None,
         'ppo_data_teacher_prompt': None,
+        'ppo_data_label_key': None,
+        'ppo_data_include_label_in_teacher_prompt': False,
     }
     defaults.update(kwargs)
     return SimpleNamespace(**defaults)
@@ -94,4 +96,28 @@ def test_ppo_data_transform_opsd():
     assert len(transformed) == 1
     assert transformed[0]['messages'] == [{'role': 'user', 'content': 'What is 5+5?'}]
     assert 'candidate answer that may be correct' in transformed[0]['teacher_prompt']
+    assert '10' in transformed[0]['teacher_prompt']
+
+
+def test_ppo_data_transform_opsd_with_label():
+    dataset = HfDataset.from_list([
+        {
+            'messages': [{'role': 'user', 'content': 'What is 5+5?'}],
+            'answer': '10',
+            'ground_truth': '10',
+            'expect_acc': 0.95,
+        },
+    ])
+
+    transformed = apply_ppo_data_transform(
+        dataset,
+        _build_args(
+            ppo_data_transform='opsd',
+            ppo_data_label_key='ground_truth',
+            ppo_data_include_label_in_teacher_prompt=True,
+        ),
+        split='train')
+
+    assert len(transformed) == 1
+    assert 'The ground-truth answer is' in transformed[0]['teacher_prompt']
     assert '10' in transformed[0]['teacher_prompt']

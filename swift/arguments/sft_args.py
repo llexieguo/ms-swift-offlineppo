@@ -1,5 +1,6 @@
 # Copyright (c) ModelScope Contributors. All rights reserved.
 import os
+import re
 from dataclasses import dataclass
 from transformers.utils.versions import require_version
 from typing import Literal, Optional
@@ -189,6 +190,8 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
     ppo_data_score_keys: Optional[str] = None
     ppo_data_score_weights: Optional[str] = None
     ppo_data_teacher_prompt: Optional[str] = None
+    ppo_data_label_key: Optional[str] = None
+    ppo_data_include_label_in_teacher_prompt: bool = False
 
     def _check_padding_free(self):
         if self.padding_free or self.packing:
@@ -256,7 +259,7 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
     def _init_ppo_data_transform(self):
         if self.ppo_data_score_keys is not None:
             if isinstance(self.ppo_data_score_keys, str):
-                score_keys = [key.strip() for key in self.ppo_data_score_keys.split(',') if key.strip()]
+                score_keys = [key.strip() for key in re.split(r'[\s,]+', self.ppo_data_score_keys) if key.strip()]
             else:
                 score_keys = [str(key).strip() for key in self.ppo_data_score_keys if str(key).strip()]
             if not score_keys:
@@ -264,8 +267,10 @@ class SftArguments(SwanlabArguments, TunerArguments, BaseArguments, Seq2SeqTrain
             self.ppo_data_score_keys = score_keys
             if self.ppo_data_score_weights is not None:
                 if isinstance(self.ppo_data_score_weights, str):
-                    score_weights = [float(weight.strip()) for weight in self.ppo_data_score_weights.split(',')
-                                     if weight.strip()]
+                    score_weights = [
+                        float(weight.strip()) for weight in re.split(r'[\s,]+', self.ppo_data_score_weights)
+                        if weight.strip()
+                    ]
                 else:
                     score_weights = [float(weight) for weight in self.ppo_data_score_weights]
                 if len(score_weights) != len(score_keys):
