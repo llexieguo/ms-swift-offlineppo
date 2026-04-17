@@ -1,0 +1,50 @@
+{
+  "input_path": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/results/mcts_v5_thinking_distence/qwen3-vl-8b",
+  "run_dir": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/results/mcts_v5_thinking_distence/qwen3-vl-8b",
+  "samples_dir": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/results/mcts_v5_thinking_distence/qwen3-vl-8b/samples",
+  "output_dir": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/mcts_data/v5_thinking_export",
+  "output_files": {
+    "ppo": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/mcts_data/v5_thinking_export/msswift_ppo.jsonl"
+  },
+  "dataset_type": "ppo",
+  "record_style": "minimal",
+  "prompt_source": "template",
+  "main_template_path": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/scripts/main_prompt_template_example.md",
+  "sub_template_path": null,
+  "actor": "main",
+  "completion_mode": "full",
+  "image_mode": "prefix",
+  "resolve_images": "auto",
+  "terminal_scope": "all_terminal",
+  "empty_reward": "zero",
+  "image_storage_mode": "file_paths",
+  "images_output_dir": "/mnt/shared-storage-user/xuexiangyuan/workspace/mas_orchestra/mcts_data/v5_thinking_export/images",
+  "image_path_style": "absolute",
+  "filter_fallback": true,
+  "sample_dir_count": 40,
+  "skipped_samples": [],
+  "skipped_record_count": 19838,
+  "rows_per_mode": {
+    "ppo": 4282
+  },
+  "image_resolution": {
+    "enabled": true,
+    "dataset_name": "InternScience/SGI-Reasoning",
+    "dataset_split": "test",
+    "resolved_task_count": 40,
+    "missing_task_ids": [],
+    "unresolved_image_items": 0
+  },
+  "notes": {
+    "ms_swift_messages_required": true,
+    "ppo_prompt_only": "ppo export ends with the user turn only; assistant targets are omitted",
+    "reward_definition": "expected_acc_reward = correct_terminal_descendant_count / descendant_terminal_count or / descendant_submit_count depending on terminal_scope",
+    "full_completion_mode": "completion_mode=full rebuilds <think>...</think> plus the final assistant content from logged thinking/raw_text",
+    "prompt_source": "logged uses stored prompts; template reconstructs prompts from fixed repo templates plus node state",
+    "resolve_images_never": "resolve_images=never reads image_count from selected_tasks.json to add <image> tokens to the prompt without fetching images from HuggingFace or embedding them in the record; image_count is written by the runner when it saves selected_tasks.json",
+    "image_storage_mode": "inline keeps image payloads in JSON records; file_paths writes data-url images to files and stores file paths; detached writes files but omits images from JSON records while preserving <image> token insertion.",
+    "external_md_templates": "Pass --main-template-md and/or --sub-template-md to override reconstructed prompts with Markdown templates and placeholder filling",
+    "formatter_hook": "Pass --formatter path/to/file.py[:func_name] to override each exported record",
+    "filter_fallback": "When --filter-fallback is set, calls where the node's orchestra_reasoning matches a known guardrail fallback phrase are skipped and counted in skipped_record_count."
+  }
+}

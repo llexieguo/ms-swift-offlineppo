@@ -281,11 +281,15 @@ class SwiftRLHF(SwiftSft):
 
         Groups samples by prompt text, computes advantage = reward - group_mean(reward)
         for groups with 2+ solutions. Singletons get advantage = 0.
+
+        If ``offline_reinforce_advantage_key`` is set, skip group computation and use
+        the pre-computed advantage column directly (e.g. TD / Q-V advantage).
         """
         from collections import defaultdict
         args = self.args
         answer_key = args.offline_reinforce_answer_key
         reward_key = args.offline_reinforce_reward_key
+        advantage_key = getattr(args, 'offline_reinforce_advantage_key', None)
 
         def _add_answer_to_messages(example):
             answer = example.get(answer_key)
@@ -309,6 +313,28 @@ class SwiftRLHF(SwiftSft):
                 reward_key,
                 'Offline REINFORCE++',
             )
+
+            # Fast path: use precomputed advantage column (e.g. TD advantage from MCTS).
+            if advantage_key:
+                adv_values = [float(dataset[i].get(advantage_key, 0.0)) for i in range(len(dataset))]
+                n_nonzero = sum(1 for v in adv_values if v != 0.0)
+                if adv_values:
+                    import statistics as _stats
+                    _mean = _stats.mean(adv_values)
+                    _std = _stats.pstdev(adv_values) if len(adv_values) > 1 else 0.0
+                    _min, _max = min(adv_values), max(adv_values)
+                    logger.info(
+                        f'Offline REINFORCE++ using precomputed advantage column '
+                        f'"{advantage_key}": {len(adv_values)} samples, {n_nonzero} non-zero '
+                        f'({100*n_nonzero/max(1,len(adv_values)):.1f}%), '
+                        f'mean={_mean:.4f} std={_std:.4f} min={_min:.4f} max={_max:.4f}')
+
+                def _set_precomputed(example, idx):
+                    example['_advantage'] = adv_values[idx]
+                    return example
+
+                dataset = dataset.map(_set_precomputed, with_indices=True)
+                return dataset
 
             prompt_groups = defaultdict(list)
             for idx in range(len(dataset)):

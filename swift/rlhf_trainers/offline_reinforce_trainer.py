@@ -109,7 +109,18 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
         pg_loss = (pg_loss * shift_mask).sum(-1) / num_tokens
         pg_loss = pg_loss.mean()
 
-        per_token_kl = per_token_logps - ref_per_token_logps
+        # KL estimator:
+        #   'k1' : logπ - logπ_ref (original; unbiased in expectation but per-sample can be
+        #          negative, which produces gradients that push the model AWAY from the ref
+        #          distribution — unsafe when the advantage signal is sparse).
+        #   'k3' : exp(logπ_ref - logπ) - (logπ_ref - logπ) - 1  (GRPO-style, always >= 0,
+        #          gradient direction correctly keeps π close to π_ref).
+        kl_estimator = getattr(self.args, 'kl_estimator', 'k1')
+        if kl_estimator == 'k3':
+            log_ratio = ref_per_token_logps - per_token_logps  # Δ = logπ_ref - logπ
+            per_token_kl = torch.exp(log_ratio) - log_ratio - 1
+        else:
+            per_token_kl = per_token_logps - ref_per_token_logps
         kl = (per_token_kl * shift_mask).sum(-1) / num_tokens
         kl_loss = kl.mean()
 
@@ -118,9 +129,11 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
         metrics = {
             'offline_reinforce/pg_loss': pg_loss.detach().item(),
             'offline_reinforce/kl': kl_loss.detach().item(),
+            'offline_reinforce/kl_abs': kl_loss.detach().abs().item(),
             'offline_reinforce/reward_mean': rewards.mean().item(),
             'offline_reinforce/advantage_mean': advantages.mean().item(),
             'offline_reinforce/advantage_std': advantages.std().item() if advantages.numel() > 1 else 0.0,
+            'offline_reinforce/advantage_abs_mean': advantages.detach().abs().mean().item(),
         }
         self.store_metrics(metrics, train_eval='train')
 

@@ -173,6 +173,16 @@ class OfflineReinforceArguments:
             rank / (G - 1) - 0.5, where rank is its position (0 = worst) after sorting by reward and G
             is group size. Tied rewards all receive advantage 0. This removes the effect of reward
             magnitude and only retains ordering information. Defaults to False.
+        offline_reinforce_advantage_key (Optional[str]): If set, the trainer will read the
+            pre-computed advantage directly from this dataset column and completely bypass the
+            internal group-mean advantage computation. Useful for supplying TD / Q-V advantages
+            computed from an external value estimator (e.g. MCTS subtree expected accuracy).
+            Defaults to None (use internal group-mean advantage).
+        offline_reinforce_kl_estimator (str): KL estimator variant. 'k1' = logπ - logπ_ref (original
+            behaviour, unbiased but per-sample can be negative which yields gradients that push the
+            model AWAY from the reference distribution). 'k3' = exp(logπ_ref - logπ) - (logπ_ref -
+            logπ) - 1 (GRPO-style, always non-negative, gradient direction is correct). Defaults
+            to 'k1' for backward compatibility; 'k3' is strongly recommended for stability.
     """
     offline_reinforce_kl_coef: float = 0.05
     offline_reinforce_whiten_advantages: bool = True
@@ -181,6 +191,8 @@ class OfflineReinforceArguments:
     offline_reinforce_reward_keys: Optional[str] = None
     offline_reinforce_reward_weights: Optional[str] = None
     offline_reinforce_use_rank_advantage: bool = False
+    offline_reinforce_advantage_key: Optional[str] = None
+    offline_reinforce_kl_estimator: str = 'k1'
 
 
 @dataclass
@@ -337,6 +349,7 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
         if self.rlhf_type == 'offline_reinforce':
             training_args['kl_coef'] = self.offline_reinforce_kl_coef
             training_args['whiten_advantages'] = self.offline_reinforce_whiten_advantages
+            training_args['kl_estimator'] = self.offline_reinforce_kl_estimator
 
     def __post_init__(self):
         self._process_loss_type()
