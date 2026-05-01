@@ -1,0 +1,143 @@
+{
+  "task_id": "SGI_Reasoning_0101",
+  "question": "The first image shows the operational sensitivity of the three detectors—LIGO Hanford (yellow), LIGO Livingston (blue), and Virgo (green)—over the same timeline.  Sensitivity is quantified by the BNS (Binary Neutron Star) Range, measured in Megaparsecs (Mpc).  The second image plots the cumulative number of confirmed gravitational-wave merger observations as a function of time.  The timeline is segmented into the four major observing periods: O1, O2, O3a, and O3b. Consider two distinct observational epochs: one defined by the LIGO Hanford observatory operating at its lowest sensitivity shown on the chart (average BNS range clearly below 80 Mpc), and another defined by the Virgo observatory operating at its peak sensitivity. Calculate the ratio of *new* gravitational-wave events discovered during the peak Virgo epoch to the *total* number of events accumulated by the end of the low-sensitivity Hanford epoch. Select the closest value from the options 0 to 9 below.",
+  "gold_answer_letter": "D",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gpt-5",
+    "grok-4-0709",
+    "o4-mini"
+  ],
+  "correct_model_count": 6,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 89,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 89,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 89,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 89,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 101,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 89,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 89,
+      "predicted_letter": "A",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 101,
+      "predicted_letter": "C",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 89,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 89,
+      "predicted_letter": "I",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 101,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 89,
+      "predicted_letter": "H",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 101,
+      "predicted_letter": "H",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 89,
+      "predicted_letter": "H",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 89,
+      "predicted_letter": "I",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 89,
+      "predicted_letter": "I",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 101,
+      "predicted_letter": "I",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 101,
+      "predicted_letter": "I",
+      "gold_letter": "G",
+      "is_correct": false
+    }
+  ]
+}

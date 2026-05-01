@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0279",
+  "question": "The high-pressure exhibiting high-temperature superconductivity in La₃Ni₂O₇, a double-layer nickelate material, requires understanding its electronic and magnetic properties under atmospheric pressure to comprehend its superconducting mechanism. Comprehensive studies using X-ray absorption spectroscopy (XAS) and resonant inelastic X-ray scattering (RIXS) revealed its small charge transfer energy and distinct ligand hole characteristics. For the first time, researchers directly observed the spin density wave (SDW) order at the (0.25,0.25) wavenumber and associated magnetic excitation. This SDW order emerges below approximately 150 K, demonstrating strong anisotropy and unique polarization-dependent properties. Based on the XAS, RIXS, and polarization analysis results shown in the image, which of the following statements about the spin density wave (SDW) order in La₃Ni₂O₇ is incorrect?",
+  "gold_answer_letter": "G",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 143,
+      "predicted_letter": "H",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 279,
+      "predicted_letter": "H",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 143,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 143,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 279,
+      "predicted_letter": "I",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 279,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 279,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 143,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 143,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 143,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 279,
+      "predicted_letter": "I",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 279,
+      "predicted_letter": "C",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

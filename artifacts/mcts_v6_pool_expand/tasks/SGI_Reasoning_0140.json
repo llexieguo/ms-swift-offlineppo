@@ -1,0 +1,143 @@
+{
+  "task_id": "SGI_Reasoning_0140",
+  "question": "The first image shows the thermoelectric potential and conductivity at different electrolyte concentrations. The second image shows the thermoelectric potential and conductivity at different concentrations of sodium chloride.When sodium chloride is added on the basis of the maximum electrolyte concentration, how much can the thermoelectric potential and ionic conductivity of the hydrogel increase, expressed in percentage? Keep the result to two decimal places.",
+  "gold_answer_letter": "E",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-3-pro-preview",
+    "intern-s1",
+    "o3",
+    "qwen3-vl-235b-a22b-instruct"
+  ],
+  "correct_model_count": 6,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 104,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 104,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 140,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 104,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 104,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 104,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 104,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 104,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 104,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 104,
+      "predicted_letter": "H",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 104,
+      "predicted_letter": "C",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 140,
+      "predicted_letter": "H",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 140,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 140,
+      "predicted_letter": null,
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 104,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 104,
+      "predicted_letter": "C",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 140,
+      "predicted_letter": null,
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 140,
+      "predicted_letter": "I",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

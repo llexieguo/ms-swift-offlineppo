@@ -1,0 +1,152 @@
+{
+  "task_id": "SGI_Reasoning_0135",
+  "question": "Image are Cationic potential and its use in Na-ion layered oxides. Which one is O3-type (rhombohedral) layered oxides? The “cationic potential”: Фcation = (ФTM*ФNa)/ФO, where ФTM represents the weighted average ionic potential of TMs, defined as ФTM = Σ((ωi*ni)/Ri); ωi is the content of TMi having charge number ni and radius Ri; and ФNa represents the weighted average ionic potential of Na defined as ФNa =x/RNa. Charge balance in NaxTMO2 composition demands Σ(ωi*ni) =4-x, where x represents Na content and 4 is the total oxidation state to charge compensate O2−.",
+  "gold_answer_letter": "B",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-pro-preview",
+    "gpt-4.1",
+    "gpt-4o",
+    "gpt-5",
+    "gpt-5.1-2025-11-13",
+    "grok-4-0709",
+    "intern-s1",
+    "llama-4-scout",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-8b-instruct"
+  ],
+  "correct_model_count": 15,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 135,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 135,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 135,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 118,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 135,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 135,
+      "predicted_letter": "C",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 118,
+      "predicted_letter": "A",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 135,
+      "predicted_letter": "C",
+      "gold_letter": "G",
+      "is_correct": false
+    }
+  ]
+}

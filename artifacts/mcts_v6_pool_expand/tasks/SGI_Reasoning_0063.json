@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0063",
+  "question": "The first image shows AF3's performance on multiple biomolecular complex prediction tasks, and the second image provides detailed numerical data of the performance. Based on these two images, which of the following statements about AF3's performance is correct?\nAF3's success rate on high-quality, single-residue glycosylation (pocket r.m.s.d. < 2 Å) is lower than 70%.\nAF3 outperforms RoseTTAFold2NA in predicting protein–dsDNA complexes (evaluated by iLDDT).\nOn the PoseBusters V1 benchmark, AF3 (2019 cutoff) has a lower success rate (RMSD < 2 Å) than RoseTTAFold All-Atom.\nAF3's average LDDT on CASP15 RNA targets is higher than that of AIchemy_RNA2.\nThe success rate of AF3 on modified DNA residues (pocket r.m.s.d. < 2 Å) is less than 60%.\nAF3's success rate on protein–antibody interfaces (DockQ > 0.23) is higher than AlphaFold-Multimer v.2.3.\nAF3's performance on protein monomers (evaluated by LDDT) is worse than AlphaFold-Multimer v.2.3.\nOn the PoseBusters V2 benchmark, AF3 (2019 cutoff) with pocket specified has a success rate (RMSD < 2 Å) lower than 90%.\nAF3's success rate on bonded ligands (pocket r.m.s.d. < 2 Å) is higher than 80%.\nAF3's iLDDT on protein–RNA complexes is lower than 30%.",
+  "gold_answer_letter": "G",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 193,
+      "predicted_letter": "H",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 63,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 63,
+      "predicted_letter": "J",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 63,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 193,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 63,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 193,
+      "predicted_letter": "H",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 193,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 63,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 63,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    }
+  ]
+}

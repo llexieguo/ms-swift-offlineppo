@@ -1,0 +1,139 @@
+{
+  "task_id": "SGI_Reasoning_0081",
+  "question": "Panels A–C in the image show the concentration distributions of the three proteins—CFD, CORO1A, and HP—in SCD cases and survivors (measured by ELISA). Panels F–G present the ROC curves and Kaplan–Meier survival analysis results of the SCD-W3P model, which was constructed based on these three proteins, in the Discovery and Validation cohorts.\n\nBased on this information, determine which of the following statements is correct:\n\nA. Among the three proteins, HP has the highest individual discriminative ability, and its AUROC exceeds 0.90.\nB. The concentrations of all three proteins are significantly higher in SCD cases than in survivors, and CFD has the highest median concentration.\nC. The AUC of the SCD-W3P model is lower in the Discovery cohort than in the Validation cohort.\nD. The Kaplan–Meier curve shows that the survival probability of the high-risk group is significantly lower than that of the low-risk group, with a P value greater than 0.05.\nE. The median concentration of CFD in survivors is higher than that of CORO1A.\nF. CORO1A shows the greatest overlap between groups, indicating the lowest discriminative ability.\nG. The SCD-W3P model has an AUC of approximately 0.83, outperforming any single protein.\nH. HP concentration shows no significant difference between SCD cases and survivors.\nI. In the Discovery cohort, the P value of the SCD-W3P model is approximately 0.001.\nJ. In the Validation cohort, the three proteins show completely opposite trends in concentration differences.",
+  "gold_answer_letter": "G",
+  "correct_models": [
+    "gpt-4o",
+    "intern-s1"
+  ],
+  "correct_model_count": 2,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 236,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 236,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 236,
+      "predicted_letter": "G",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 236,
+      "predicted_letter": "G",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 236,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 236,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 81,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 236,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 236,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 81,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 81,
+      "predicted_letter": "I",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 81,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 236,
+      "predicted_letter": "G",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 236,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 236,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 236,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 81,
+      "predicted_letter": "I",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 81,
+      "predicted_letter": "D",
+      "gold_letter": "E",
+      "is_correct": false
+    }
+  ]
+}

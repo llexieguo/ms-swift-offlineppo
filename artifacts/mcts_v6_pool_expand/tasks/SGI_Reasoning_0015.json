@@ -1,0 +1,140 @@
+{
+  "task_id": "SGI_Reasoning_0015",
+  "question": "Based on the AI-driven workflow and data integration strategy depicted, if a research team aims to use the Recursion Operating System (the second image) to identify a novel drug candidate for a rare genetic disease, which specific step in the machine learning workflow (the first image) would be MOST CRITICAL for ensuring that the model's predictions about drug efficacy can be directly explained by the biological mechanisms captured in the multi-omics data?",
+  "gold_answer_letter": "E",
+  "correct_models": [
+    "claude-sonnet-4-5-20250929",
+    "gpt-4o",
+    "llama-4-scout"
+  ],
+  "correct_model_count": 3,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 252,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 252,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 252,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 252,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 15,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    }
+  ]
+}

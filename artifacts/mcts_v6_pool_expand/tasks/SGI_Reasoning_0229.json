@@ -1,0 +1,141 @@
+{
+  "task_id": "SGI_Reasoning_0229",
+  "question": "In earthquake monitoring, the way catalogs are processed can strongly affect the level of detail in aftershock detection. One key factor is the magnitude of completeness (Mc): a lower Mc means that smaller events are successfully detected, providing finer resolution of seismicity. Catalog processing methods that improve the detection of weak signals or apply template matching can thus reveal many more events than conventional approaches. According to The first image, which catalogue is more complete for detecting small earthquakes? According to The second image, which catalog processing shows a sudden increase in detected seismicity after the Mw 7.1 mainshock, and which have a drop?",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-flash",
+    "gpt-5",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 4,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 35,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 35,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 35,
+      "predicted_letter": "B",
+      "gold_letter": "B",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 229,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 35,
+      "predicted_letter": "D",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 35,
+      "predicted_letter": "F",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 229,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 229,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 229,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 35,
+      "predicted_letter": null,
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 229,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 35,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 229,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    }
+  ]
+}

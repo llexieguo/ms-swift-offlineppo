@@ -1,0 +1,138 @@
+{
+  "task_id": "SGI_Reasoning_0287",
+  "question": "In the benzene molecule's 3B1u excited state as the second image, the FermiNet energy error is 0.088 eV while Psiformer shows 0.102 eV. For lithium's 2S state as the first image, NES-VMC calculates -7.4785 Hartree versus experimental -7.478 Hartree. If we define the relative precision metric as ΔE = |E_exp - E_calc| / E_exp, what is the ratio of ΔE_benzene(3B1u) to ΔE_li(2S) when converted to consistent units? Provide the numerical ratio with three decimal places.",
+  "gold_answer_letter": "D",
+  "correct_models": [
+    "claude-sonnet-4-5-20250929"
+  ],
+  "correct_model_count": 1,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 153,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 153,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 153,
+      "predicted_letter": "E",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 153,
+      "predicted_letter": "H",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 287,
+      "predicted_letter": "H",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 153,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 153,
+      "predicted_letter": "B",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 153,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 287,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 287,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 153,
+      "predicted_letter": "F",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 287,
+      "predicted_letter": null,
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 153,
+      "predicted_letter": "F",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 153,
+      "predicted_letter": "E",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 153,
+      "predicted_letter": "E",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 153,
+      "predicted_letter": "A",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 287,
+      "predicted_letter": null,
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 287,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    }
+  ]
+}

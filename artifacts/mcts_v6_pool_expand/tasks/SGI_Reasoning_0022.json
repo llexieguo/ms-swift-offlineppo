@@ -1,0 +1,148 @@
+{
+  "task_id": "SGI_Reasoning_0022",
+  "question": "The first image shows the functional elements corresponding to the interval.The second image shows the nucleotide sequence interval where the functional elements are located. Clones containing spontaneous mutations in the 8 nucleotide sequence intervals were compared with clones without mutations in the interval.  Which elements in the interval caused a large increase in mΔmRNA levels (>50%)？",
+  "gold_answer_letter": "G",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-pro-preview",
+    "grok-4-0709",
+    "llama-4-scout",
+    "o4-mini",
+    "qwen3-vl-235b-a22b-instruct",
+    "qwen3-vl-8b-instruct",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 11,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 22,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 22,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 223,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 22,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 22,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 223,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 223,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 223,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 22,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 223,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 22,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 223,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

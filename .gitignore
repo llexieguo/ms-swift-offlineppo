@@ -156,3 +156,7 @@ ast_index_file.py
 
 
 /Users/lexi/workplace/sgi/ms-swift/examples/train/rlhf/offline_ppov5_thinking_export/msswift_ppo.jsonl
+
+# local workspace files
+.codex
+tokenizer_config copy.json

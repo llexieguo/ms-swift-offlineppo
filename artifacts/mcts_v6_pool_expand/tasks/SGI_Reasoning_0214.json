@@ -1,0 +1,143 @@
+{
+  "task_id": "SGI_Reasoning_0214",
+  "question": "Based on coupled analysis of both image, when implementing multi-scale hybrid inversion in the Yangtze River Delta region with spatially heterogeneous prior errors (50% overestimation in urban centers, 30% underestimation in suburbs) and OMI observations affected by seasonal boundary layer height variations, which methodological combination would produce the most concealed error propagation, resulting in spatially plausible posterior emissions but undetectable systematic distortion in temporal trends?",
+  "gold_answer_letter": "J",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gpt-4o",
+    "intern-s1",
+    "llama-4-scout",
+    "o4-mini",
+    "qwen3-vl-8b-instruct"
+  ],
+  "correct_model_count": 6,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 77,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 77,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 77,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 77,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 77,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 214,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 77,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 77,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 77,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 214,
+      "predicted_letter": "J",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 77,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 77,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 214,
+      "predicted_letter": "D",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 214,
+      "predicted_letter": "D",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 214,
+      "predicted_letter": "A",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 77,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 77,
+      "predicted_letter": "H",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 214,
+      "predicted_letter": "D",
+      "gold_letter": "G",
+      "is_correct": false
+    }
+  ]
+}

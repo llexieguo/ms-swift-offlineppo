@@ -1,0 +1,153 @@
+{
+  "task_id": "SGI_Reasoning_0052",
+  "question": "Based on the first image, which method has the biggest number of selected features？And in the second image,what is the score of the area under the receiver operating characteristic (AUROC) about this method?",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-pro-preview",
+    "gpt-4.1",
+    "gpt-4o",
+    "gpt-5",
+    "gpt-5.1-2025-11-13",
+    "grok-4-0709",
+    "intern-s1",
+    "llama-4-scout",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-235b-a22b-instruct",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 16,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 52,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 52,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 52,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 202,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 52,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 52,
+      "predicted_letter": null,
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 52,
+      "predicted_letter": "I",
+      "gold_letter": "F",
+      "is_correct": false
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "task_id": "SGI_Reasoning_0012",
+  "question": "judge based on Efficient Learning of CXR Data: AUC Change Curve with Training Set Size.Based on the MedSigLIP curve for pneumothorax shown in the image, the minimum conservative integer sample size required to achieve an AUC of 0.90; for pulmonary edema, the minimum conservative integer sample size required to achieve an AUC ≥ 0.80 on the MedSigLIP curve (counted by number of images).",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gemini-3-pro-preview",
+    "gpt-5",
+    "intern-s1-mini",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 8,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 227,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 227,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 12,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 227,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 12,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 227,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 227,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 12,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 12,
+      "predicted_letter": "I",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 12,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 227,
+      "predicted_letter": null,
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 227,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 12,
+      "predicted_letter": "I",
+      "gold_letter": "E",
+      "is_correct": false
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "task_id": "SGI_Reasoning_0216",
+  "question": "The first image shows sector-specific pollutant emission increments (Posterior Emission - Prior Emission) in East Asia in January 2010, labeled with SO₂ increment of Industry sector in North China Plain = +12×10⁻²TgS, CO increment of Residential sector in Yangtze River Delta = +8×10⁻²TgC; The second image shows surface pollutant concentration simulation results in East Asia in January 2010, labeled with average surface SO₂ concentration in North China Plain = 58μg/m³ (high-concentration area), average surface NO₂ concentration in Yangtze River Delta = 42μg/m³, average surface CO concentration in Yangtze River Delta = 35μg/m³ (high-concentration area). Define Sector-Region Contribution Matching Degree: If the core region of a sector’s pollutant increment (e.g., the core region of Industry SO₂ increment is North China Plain) completely overlaps with the high-concentration area of that pollutant’s surface concentration, the matching degree = 100%; partial overlap = 50%; no overlap = 0%. Calculate the average value of the two groups of matching degrees: Industry SO₂ & North China Plain and Residential CO & Yangtze River Delta (retain 1 decimal place, unit: %).",
+  "gold_answer_letter": "D",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gpt-5.1-2025-11-13"
+  ],
+  "correct_model_count": 2,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 78,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 216,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 216,
+      "predicted_letter": "B",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 78,
+      "predicted_letter": "A",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 78,
+      "predicted_letter": "H",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 216,
+      "predicted_letter": "I",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 78,
+      "predicted_letter": null,
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 216,
+      "predicted_letter": null,
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 78,
+      "predicted_letter": "C",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 78,
+      "predicted_letter": "B",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 216,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 216,
+      "predicted_letter": "B",
+      "gold_letter": "C",
+      "is_correct": false
+    }
+  ]
+}

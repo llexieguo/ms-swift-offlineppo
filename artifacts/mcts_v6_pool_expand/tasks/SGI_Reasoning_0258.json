@@ -1,0 +1,141 @@
+{
+  "task_id": "SGI_Reasoning_0258",
+  "question": "The first image shows the variation of complex error (vertical axis, unit: dB) with r₁/r_far (horizontal axis, range 0~0.9) for different AUT sizes (truncation numbers N=40, 60, 80, 100, 120) under the condition of r₂/r_far=0.5. The second image contains two subgraphs (both under r₂/r_far=0.5): the upper subgraph shows the complex error variation of AUT types like Square array and Circular reflector, and the lower subgraph shows the complex error variation of 15λ×7λ array, 15λ×5λ array, 15λ×3λ array, and 15λ linear dipole array (both subgraphs have the same vertical axis of complex error in dB and horizontal axis of r₁/r_far in 0~0.9). When r₁/r_far=0.2, the absolute value of the complex error difference (calculation method: complex error of \"AUT with N=120\" minus complex error of \"15λ×3λ array\") is closest to which of the following values (unit: dB)?",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "gemini-3-pro-preview",
+    "llama-4-scout",
+    "o3",
+    "o4-mini"
+  ],
+  "correct_model_count": 4,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 258,
+      "predicted_letter": "H",
+      "gold_letter": "H",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 18,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 18,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 18,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 18,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 18,
+      "predicted_letter": "A",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 18,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 18,
+      "predicted_letter": "J",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 18,
+      "predicted_letter": "B",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 18,
+      "predicted_letter": "B",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 18,
+      "predicted_letter": "J",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 258,
+      "predicted_letter": "C",
+      "gold_letter": "H",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 258,
+      "predicted_letter": "C",
+      "gold_letter": "H",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 18,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 258,
+      "predicted_letter": "C",
+      "gold_letter": "H",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 18,
+      "predicted_letter": "B",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 258,
+      "predicted_letter": "C",
+      "gold_letter": "H",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 258,
+      "predicted_letter": "B",
+      "gold_letter": "H",
+      "is_correct": false
+    }
+  ]
+}

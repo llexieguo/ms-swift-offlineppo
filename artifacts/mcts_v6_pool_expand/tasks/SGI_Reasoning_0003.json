@@ -1,0 +1,144 @@
+{
+  "task_id": "SGI_Reasoning_0003",
+  "question": "The first image shows the relationship between the affinity indicators of 27810 successfully predicted complexes and the ligand plDDT. The second chapter images the predicted structure of protein ligand complexes. All experimental techniques have shown a relationship with the ligand plDDT, and umol can also distinguish low affinity and high affinity conjugates to some extent. When the ligand plDDT decreases from above 80 to below 50, the corresponding change in binding free energy (kJ/mol) is calculated. Under the assumption of a temperature of 298K, the result is rounded to two decimal places.",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gpt-4o",
+    "gpt-5.1-2025-11-13",
+    "intern-s1",
+    "o4-mini",
+    "qwen3-vl-8b-instruct"
+  ],
+  "correct_model_count": 7,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 219,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 219,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 219,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 3,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 219,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 219,
+      "predicted_letter": "F",
+      "gold_letter": "F",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 3,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 219,
+      "predicted_letter": "A",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 219,
+      "predicted_letter": "H",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 3,
+      "predicted_letter": "A",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 219,
+      "predicted_letter": "A",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 219,
+      "predicted_letter": "H",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 3,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 3,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 219,
+      "predicted_letter": null,
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 219,
+      "predicted_letter": "E",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 219,
+      "predicted_letter": "E",
+      "gold_letter": "F",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 3,
+      "predicted_letter": "F",
+      "gold_letter": "I",
+      "is_correct": false
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0047",
+  "question": "The first image shows the distribution of a key performance metric for four computational models (A, B, C, D) across a benchmark set. The second image plots the metric values of Model A against Model B for each individual benchmark instance. Based on a comprehensive analysis of both images, which one of the following statements is definitively and quantitatively CORRECT?",
+  "gold_answer_letter": "E",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 244,
+      "predicted_letter": "H",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 244,
+      "predicted_letter": "A",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 244,
+      "predicted_letter": null,
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 244,
+      "predicted_letter": "G",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 47,
+      "predicted_letter": "E",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 244,
+      "predicted_letter": "G",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 244,
+      "predicted_letter": "F",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 244,
+      "predicted_letter": "G",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 47,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 47,
+      "predicted_letter": "C",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 244,
+      "predicted_letter": "G",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 47,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 244,
+      "predicted_letter": "C",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 244,
+      "predicted_letter": "E",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 244,
+      "predicted_letter": "E",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 244,
+      "predicted_letter": "G",
+      "gold_letter": "B",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 47,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 47,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    }
+  ]
+}

@@ -30,11 +30,13 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
                  ref_model: Optional[Union[PreTrainedModel, nn.Module]] = None,
                  *_args,
                  reward_key: str = 'reward',
+                 sample_weight_key: Optional[str] = None,
                  **kwargs):
         self.is_peft_model = isinstance(model, PeftModel)
         self.ref_adapter_name = getattr(kwargs.get('args'), 'ref_adapter_name', None)
         self.model_adapter_name = None
         self.reward_key = reward_key
+        self.sample_weight_key = sample_weight_key
         super().__init__(model, ref_model, *_args, **kwargs)
 
     def create_loss_and_eval_metric(self, args):
@@ -45,17 +47,21 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
         base_collator = partial(template.data_collator, padding_to=padding_to)
 
         reward_key = self.reward_key
+        sample_weight_key = self.sample_weight_key
 
         def offline_reinforce_collator(batch, **kwargs):
             rewards = []
             advantages = []
+            sample_weights = []
             for b in batch:
                 extra = b.get('_extra_kwargs', {})
                 rewards.append(float(extra.get(reward_key, 0.0)))
                 advantages.append(float(extra.get('_advantage', 0.0)))
+                sample_weights.append(float(extra.get(sample_weight_key, 1.0)) if sample_weight_key else 1.0)
             result = base_collator(batch, **kwargs)
             result['rewards'] = torch.tensor(rewards, dtype=torch.float32)
             result['advantages'] = torch.tensor(advantages, dtype=torch.float32)
+            result['sample_weights'] = torch.tensor(sample_weights, dtype=torch.float32)
             return result
 
         return offline_reinforce_collator
@@ -83,6 +89,7 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
         rewards = inputs.pop('rewards').to(self.args.device)
         advantages = inputs.pop('advantages').to(self.args.device)
+        sample_weights = inputs.pop('sample_weights').to(self.args.device)
         labels = inputs.pop('labels')
         loss_mask = labels != -100
 
@@ -107,33 +114,49 @@ class OfflineReinforceTrainer(RLHFTrainerMixin, SwiftMixin, DataLoaderMixin, HfT
         # Pure REINFORCE++ policy gradient: -advantage * log_pi (no ratio, no clipping)
         pg_loss = -advantages_expanded * per_token_logps
         pg_loss = (pg_loss * shift_mask).sum(-1) / num_tokens
-        pg_loss = pg_loss.mean()
 
         # KL estimator:
-        #   'k1' : logπ - logπ_ref (original; unbiased in expectation but per-sample can be
-        #          negative, which produces gradients that push the model AWAY from the ref
-        #          distribution — unsafe when the advantage signal is sparse).
-        #   'k3' : exp(logπ_ref - logπ) - (logπ_ref - logπ) - 1  (GRPO-style, always >= 0,
-        #          gradient direction correctly keeps π close to π_ref).
+        #   'k1'   : logπ - logπ_ref (original; unbiased in expectation but per-sample can be
+        #            negative, which produces gradients that push the model AWAY from the ref
+        #            distribution — unsafe when the advantage signal is sparse).
+        #   'k3'   : exp(logπ_ref - logπ) - (logπ_ref - logπ) - 1  (GRPO-style, always >= 0,
+        #            gradient direction correctly keeps π close to π_ref).
+        #   'gspo' : sequence-level GSPO-style variant. First average Δ = logπ_ref - logπ across
+        #            valid response tokens, then apply exp(Δ) - Δ - 1 once per sequence.
         kl_estimator = getattr(self.args, 'kl_estimator', 'k1')
         if kl_estimator == 'k3':
             log_ratio = ref_per_token_logps - per_token_logps  # Δ = logπ_ref - logπ
             per_token_kl = torch.exp(log_ratio) - log_ratio - 1
-        else:
+            kl = (per_token_kl * shift_mask).sum(-1) / num_tokens
+        elif kl_estimator == 'gspo':
+            log_ratio = (ref_per_token_logps - per_token_logps) * shift_mask
+            seq_mean_log_ratio = log_ratio.sum(-1) / num_tokens
+            seq_mean_log_ratio = torch.clamp(seq_mean_log_ratio, min=-20, max=20)
+            seq_kl = torch.exp(seq_mean_log_ratio) - seq_mean_log_ratio - 1
+            kl = torch.clamp(seq_kl * num_tokens.to(seq_kl.dtype), min=0.0, max=10.0)
+        elif kl_estimator == 'k1':
             per_token_kl = per_token_logps - ref_per_token_logps
-        kl = (per_token_kl * shift_mask).sum(-1) / num_tokens
-        kl_loss = kl.mean()
-
-        loss = pg_loss + self.args.kl_coef * kl_loss
+            kl = (per_token_kl * shift_mask).sum(-1) / num_tokens
+        else:
+            raise ValueError(
+                f"Unknown kl_estimator: {kl_estimator}. Possible values are 'k1', 'k3', and 'gspo'.")
+        per_sample_loss = pg_loss + self.args.kl_coef * kl
+        weight_sum = sample_weights.sum().clamp_min(1e-8)
+        loss = (per_sample_loss * sample_weights).sum() / weight_sum
+        pg_loss = (pg_loss * sample_weights).sum() / weight_sum
+        kl_loss = (kl * sample_weights).sum() / weight_sum
 
         metrics = {
             'offline_reinforce/pg_loss': pg_loss.detach().item(),
             'offline_reinforce/kl': kl_loss.detach().item(),
             'offline_reinforce/kl_abs': kl_loss.detach().abs().item(),
+            'offline_reinforce/seq_mean_log_ratio': seq_mean_log_ratio.detach().mean().item() if kl_estimator == 'gspo' else 0.0,
+            'offline_reinforce/seq_mean_log_ratio_abs': seq_mean_log_ratio.detach().abs().mean().item() if kl_estimator == 'gspo' else 0.0,
             'offline_reinforce/reward_mean': rewards.mean().item(),
             'offline_reinforce/advantage_mean': advantages.mean().item(),
             'offline_reinforce/advantage_std': advantages.std().item() if advantages.numel() > 1 else 0.0,
             'offline_reinforce/advantage_abs_mean': advantages.detach().abs().mean().item(),
+            'offline_reinforce/sample_weight_mean': sample_weights.mean().item(),
         }
         self.store_metrics(metrics, train_eval='train')
 

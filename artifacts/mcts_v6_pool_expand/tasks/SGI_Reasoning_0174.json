@@ -1,0 +1,140 @@
+{
+  "task_id": "SGI_Reasoning_0174",
+  "question": "The first image shows fMRI brain activity reconstructions of MindEye2 and MindEye1 using different amounts of training data. The second image shows an example of a trial in which subjects preferred Brain Diffuser (1 hour) reconstructions over MindEye2 (1 hour) reconstructions. Based on the qualitative results shown in 01.png and 02.png, which of the following compound statements about the characteristics and advantages of MindEye2 (1 hour) reconstructions is completely correct?",
+  "gold_answer_letter": "J",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro"
+  ],
+  "correct_model_count": 3,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 258,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 258,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 258,
+      "predicted_letter": "I",
+      "gold_letter": "I",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 174,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 258,
+      "predicted_letter": "A",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 174,
+      "predicted_letter": "B",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 174,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 174,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 258,
+      "predicted_letter": "D",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 258,
+      "predicted_letter": "C",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 174,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 174,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

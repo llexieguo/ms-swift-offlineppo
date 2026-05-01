@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0057",
+  "question": "The two figures respectively provide information about the approximate linear relationship between average AUC and the number of positive TCRs (n), as well as the average MCC values for the CNN and raw representations.\n\nAssume that the CNN representation is equivalent to increasing the number of positive TCR samples per peptide by a factor of f (that is, neff=fn).\n\nIf MCC and AUC follow the empirical linear relationship\nMCC≈AUC−0.25\non the population average, then calculate:\n1.When the CNN’s MCC = 0.64, what is the corresponding equivalent AUC?\n2.When the raw representation’s MCC = 0.21, what is the corresponding equivalent AUC?\n3.Within the linear range of Figure 01, back-calculate the corresponding numbers of positive TCRs 𝑛CNN and 𝑛raw, and compute their ratio\n𝑓=𝑛CNN/𝑛raw",
+  "gold_answer_letter": "H",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 241,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 57,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 57,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 57,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 57,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 241,
+      "predicted_letter": "B",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 57,
+      "predicted_letter": null,
+      "gold_letter": "I",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 57,
+      "predicted_letter": "B",
+      "gold_letter": "I",
+      "is_correct": false
+    }
+  ]
+}

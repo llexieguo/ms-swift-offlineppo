@@ -178,11 +178,17 @@ class OfflineReinforceArguments:
             internal group-mean advantage computation. Useful for supplying TD / Q-V advantages
             computed from an external value estimator (e.g. MCTS subtree expected accuracy).
             Defaults to None (use internal group-mean advantage).
+        offline_reinforce_sample_weight_key (Optional[str]): If set, read a per-sample scalar
+            weight from this dataset column and apply it when averaging the offline REINFORCE++
+            loss across the batch. Useful for balancing delegate vs submit supervision without
+            physically resampling the dataset. Defaults to None.
         offline_reinforce_kl_estimator (str): KL estimator variant. 'k1' = logπ - logπ_ref (original
             behaviour, unbiased but per-sample can be negative which yields gradients that push the
             model AWAY from the reference distribution). 'k3' = exp(logπ_ref - logπ) - (logπ_ref -
-            logπ) - 1 (GRPO-style, always non-negative, gradient direction is correct). Defaults
-            to 'k1' for backward compatibility; 'k3' is strongly recommended for stability.
+            logπ) - 1 (GRPO-style, always non-negative, gradient direction is correct). 'gspo' =
+            sequence-level GSPO-style KL where Δ = mean_t(logπ_ref - logπ) over valid response tokens
+            and the penalty is exp(Δ) - Δ - 1 once per sequence. Defaults to 'k1' for backward
+            compatibility; 'k3' and 'gspo' are usually more stable.
     """
     offline_reinforce_kl_coef: float = 0.05
     offline_reinforce_whiten_advantages: bool = True
@@ -192,6 +198,7 @@ class OfflineReinforceArguments:
     offline_reinforce_reward_weights: Optional[str] = None
     offline_reinforce_use_rank_advantage: bool = False
     offline_reinforce_advantage_key: Optional[str] = None
+    offline_reinforce_sample_weight_key: Optional[str] = None
     offline_reinforce_kl_estimator: str = 'k1'
 
 

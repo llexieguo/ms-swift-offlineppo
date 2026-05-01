@@ -426,6 +426,7 @@ class SwiftRLHF(SwiftSft):
             trainer_kwargs['reward_key'] = self.args.offline_ppo_reward_key
         if self.args.rlhf_type == 'offline_reinforce':
             trainer_kwargs['reward_key'] = self.args.offline_reinforce_reward_key
+            trainer_kwargs['sample_weight_key'] = self.args.offline_reinforce_sample_weight_key
         if hasattr(self, 'reward_template'):
             trainer_kwargs['reward_template'] = self.reward_template
         if self.args.rlhf_type in ['grpo', 'gkd']:

@@ -1,0 +1,139 @@
+{
+  "task_id": "SGI_Reasoning_0193",
+  "question": "Based on the two provided images, showing the effects of aerosol processes (upper image) and emission changes (lower image) on summer MDA8 O3 mixing ratios (unit: ppbv). All subfigures use the same color bar (-10 to 10 ppbv). Determine which emission change factor and which aerosol effect factor have the most similar spatial distribution, and this similarity reflects the dominant driving mechanism for O3 changes. Please select the correct pair.",
+  "gold_answer_letter": "J",
+  "correct_models": [
+    "gemini-2.5-pro",
+    "gemini-3-pro-preview"
+  ],
+  "correct_model_count": 2,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 76,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 193,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 76,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 76,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 76,
+      "predicted_letter": "B",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 76,
+      "predicted_letter": "E",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 76,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 76,
+      "predicted_letter": "E",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 193,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 193,
+      "predicted_letter": "J",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 76,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 193,
+      "predicted_letter": "D",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 76,
+      "predicted_letter": "D",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 76,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 76,
+      "predicted_letter": "E",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 76,
+      "predicted_letter": "B",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 193,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 193,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    }
+  ]
+}

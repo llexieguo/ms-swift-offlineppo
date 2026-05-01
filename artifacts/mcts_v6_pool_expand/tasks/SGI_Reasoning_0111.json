@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0111",
+  "question": "Looking at the five image, which example has the lowest fuel cost? Which example is to minimize power loss per unit of fuel cost? Which example is minimizing voltage deviation per unit of fuel cost?  Which example focuses the most on minimizing power loss? Which example focuses the most on optimizing voltage distribution?",
+  "gold_answer_letter": "A",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 281,
+      "predicted_letter": "G",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 281,
+      "predicted_letter": "F",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 111,
+      "predicted_letter": "D",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

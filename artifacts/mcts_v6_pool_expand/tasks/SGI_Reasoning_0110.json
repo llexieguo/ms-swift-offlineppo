@@ -1,0 +1,147 @@
+{
+  "task_id": "SGI_Reasoning_0110",
+  "question": "The first image presents the voltage stability index (L-index), voltage deviation (VD), and bus voltage profiles of an IEEE 30-bus system under different cases, while the second image shows the total generation cost evolution during the OPF iterations. Considering the relationship between voltage quality and operating cost, which statement best describes the trade-off achieved in the optimized operating condition?",
+  "gold_answer_letter": "J",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gemini-2.5-flash",
+    "gpt-4.1",
+    "gpt-4o",
+    "gpt-5.1-2025-11-13",
+    "intern-s1",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-235b-a22b-instruct",
+    "qwen3-vl-8b-instruct"
+  ],
+  "correct_model_count": 10,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 110,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 285,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 110,
+      "predicted_letter": "D",
+      "gold_letter": "D",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 285,
+      "predicted_letter": "G",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 285,
+      "predicted_letter": "G",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 110,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 285,
+      "predicted_letter": "G",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 110,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 110,
+      "predicted_letter": null,
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 285,
+      "predicted_letter": "G",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 110,
+      "predicted_letter": "C",
+      "gold_letter": "D",
+      "is_correct": false
+    }
+  ]
+}

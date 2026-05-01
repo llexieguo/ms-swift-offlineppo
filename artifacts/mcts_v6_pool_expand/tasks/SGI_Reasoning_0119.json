@@ -1,0 +1,146 @@
+{
+  "task_id": "SGI_Reasoning_0119",
+  "question": "The first image shows the rheological viscosity of different resins. The second image shows the elongation at break of different resins.What is the maximum rheological viscosity difference (PaS) of the resin obtained by reacting four modified acrylic diisocyanates at a shear rate of 100S-1? What is the elongation at break of the resin with the highest rheological viscosity (%)? Keep the result to one decimal place.",
+  "gold_answer_letter": "B",
+  "correct_models": [
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-pro",
+    "gpt-4.1",
+    "gpt-5.1-2025-11-13",
+    "grok-4-0709",
+    "llama-4-scout",
+    "qwen3-vl-235b-a22b-instruct",
+    "qwen3-vl-8b-instruct",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 9,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 125,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 125,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 125,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 119,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 119,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 125,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 125,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 119,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 119,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 125,
+      "predicted_letter": "D",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 125,
+      "predicted_letter": "F",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 119,
+      "predicted_letter": "F",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 125,
+      "predicted_letter": "C",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 125,
+      "predicted_letter": "D",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 125,
+      "predicted_letter": "E",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 119,
+      "predicted_letter": null,
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 125,
+      "predicted_letter": "D",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 125,
+      "predicted_letter": "E",
+      "gold_letter": "A",
+      "is_correct": false
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "task_id": "SGI_Reasoning_0016",
+  "question": "Analyze based on the two images, if a researcher observes a 50% reduction in grooming behavior after administering a single dose of a novel compound \"X\" in the optogenetics model, and separately finds that compound X induces a 15% reduction in pupil area in marmosets that is completely blocked by WAY-100635 pre-treatment, which of the following quantitative conclusions is most strongly supported by comparing these results with the DSP-1181 data?",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 7,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 255,
+      "predicted_letter": "G",
+      "gold_letter": "G",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 16,
+      "predicted_letter": "C",
+      "gold_letter": "C",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 16,
+      "predicted_letter": "F",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 16,
+      "predicted_letter": "F",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 16,
+      "predicted_letter": "J",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 16,
+      "predicted_letter": "F",
+      "gold_letter": "C",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 255,
+      "predicted_letter": "E",
+      "gold_letter": "G",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 16,
+      "predicted_letter": null,
+      "gold_letter": "C",
+      "is_correct": false
+    }
+  ]
+}

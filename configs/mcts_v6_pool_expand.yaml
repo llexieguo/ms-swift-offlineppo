@@ -1,0 +1,14 @@
+base_run_dir: /mnt/gpfs/xuexiangyuan/workspace/mas_orchestra/results/mcts_v6/qwen3-vl-8b
+evaluation_dir: /mnt/gpfs/xuexiangyuan/workspace/mas_orchestra/results/original/sgi-bench-evaluation/evaluations
+pool_output_dir: /mnt/gpfs/xuexiangyuan/workspace/mas_orchestra/results/mcts_v6_pool_expand/model_pools
+
+pool_summary_path: /mnt/gpfs/xuexiangyuan/workspace/mas_orchestra/results/mcts_v6_pool_expand/model_pools/summary.json
+run_dir: /mnt/gpfs/xuexiangyuan/workspace/mas_orchestra/results/mcts_v6_pool_expand_leafacc03/qwen3-vl-8b
+
+start_stage: all_wrong
+leaf_acc_threshold: 0.3
+tree_budget_usd: 5.0
+max_final_leaf_count: 128
+frontier_limit: 1
+max_concurrency: 1
+random_seed: 42

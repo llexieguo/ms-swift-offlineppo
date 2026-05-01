@@ -1,0 +1,148 @@
+{
+  "task_id": "SGI_Reasoning_0071",
+  "question": "The first image illustrates the CHESHIRE workflow, including the decomposed graph representation of metabolic reactions. The second image presents internal validation results comparing CHESHIRE with other methods using BiGG models. Based on these figures, which of the following statements is correct regarding CHESHIRE's architectural design and validation performance?",
+  "gold_answer_letter": "F",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "claude-sonnet-4-5-20250929",
+    "gemini-3-pro-preview",
+    "gpt-4o",
+    "gpt-5",
+    "intern-s1",
+    "intern-s1-mini",
+    "o3",
+    "o4-mini",
+    "qwen3-vl-8b-instruct",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 11,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 71,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 71,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 204,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 71,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 71,
+      "predicted_letter": "A",
+      "gold_letter": "A",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 204,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 204,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 204,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 71,
+      "predicted_letter": "J",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 71,
+      "predicted_letter": "G",
+      "gold_letter": "A",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 204,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 204,
+      "predicted_letter": "E",
+      "gold_letter": "J",
+      "is_correct": false
+    }
+  ]
+}

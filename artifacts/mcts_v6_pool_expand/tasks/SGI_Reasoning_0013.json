@@ -1,0 +1,144 @@
+{
+  "task_id": "SGI_Reasoning_0013",
+  "question": "The presence of hazy shadows suggests interstitial pulmonary edema. The image displays 4 abnormality categories in the CheXpert dataset.The question is, which column name best corresponds to the manifestation of Edema in the Original red-framed region?",
+  "gold_answer_letter": "H",
+  "correct_models": [
+    "claude-opus-4-1-20250805",
+    "gemini-2.5-flash",
+    "gemini-3-pro-preview",
+    "gpt-5",
+    "grok-4-0709",
+    "o4-mini",
+    "qwen3-vl-plus"
+  ],
+  "correct_model_count": 7,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 226,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 226,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 13,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 226,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 13,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 226,
+      "predicted_letter": "J",
+      "gold_letter": "J",
+      "is_correct": true
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 13,
+      "predicted_letter": "E",
+      "gold_letter": "E",
+      "is_correct": true
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 226,
+      "predicted_letter": "C",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 226,
+      "predicted_letter": "C",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 13,
+      "predicted_letter": "D",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 13,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 226,
+      "predicted_letter": "A",
+      "gold_letter": "J",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 13,
+      "predicted_letter": "J",
+      "gold_letter": "E",
+      "is_correct": false
+    }
+  ]
+}

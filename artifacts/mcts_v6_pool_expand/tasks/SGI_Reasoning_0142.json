@@ -1,0 +1,136 @@
+{
+  "task_id": "SGI_Reasoning_0142",
+  "question": "The first image is the working principle of the battery, and the second image is. Under different temperature differences, Fe(CN)64- almost completely crystallizes at the cold end, and the crystal will dissolve rapidly with the increase of the temperature at the hot end. How much mV is the voltage difference between the two batteries at 10K temperature difference? The result is retained to one decimal place.",
+  "gold_answer_letter": "H",
+  "correct_models": [],
+  "correct_model_count": 0,
+  "models_evaluated_count": 18,
+  "model_rows": [
+    {
+      "model": "claude-opus-4-1-20250805",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "evaluation_row_index": 132,
+      "predicted_letter": "I",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-flash",
+      "evaluation_row_index": 132,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-2.5-pro",
+      "evaluation_row_index": 132,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gemini-3-pro-preview",
+      "evaluation_row_index": 142,
+      "predicted_letter": "A",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4.1",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-4o",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5",
+      "evaluation_row_index": 132,
+      "predicted_letter": "A",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "gpt-5.1-2025-11-13",
+      "evaluation_row_index": 142,
+      "predicted_letter": "H",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "grok-4-0709",
+      "evaluation_row_index": 142,
+      "predicted_letter": "J",
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "intern-s1-mini",
+      "evaluation_row_index": 142,
+      "predicted_letter": null,
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "llama-4-scout",
+      "evaluation_row_index": 132,
+      "predicted_letter": null,
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "o3",
+      "evaluation_row_index": 132,
+      "predicted_letter": "G",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "o4-mini",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-235b-a22b-instruct",
+      "evaluation_row_index": 132,
+      "predicted_letter": "C",
+      "gold_letter": "E",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-8b-instruct",
+      "evaluation_row_index": 142,
+      "predicted_letter": null,
+      "gold_letter": "D",
+      "is_correct": false
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "evaluation_row_index": 142,
+      "predicted_letter": "I",
+      "gold_letter": "D",
+      "is_correct": false
+    }
+  ]
+}

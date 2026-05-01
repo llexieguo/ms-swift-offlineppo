@@ -94,7 +94,7 @@ class OfflinePPOConfig(TrainArgumentsMixin, HfTrainingArguments):
 class OfflineReinforceConfig(TrainArgumentsMixin, HfTrainingArguments):
     kl_coef: float = 0.05
     whiten_advantages: bool = True
-    kl_estimator: str = 'k1'  # 'k1' (logπ - logπ_ref) or 'k3' (exp(Δ)-Δ-1, GRPO-style)
+    kl_estimator: str = 'k1'  # 'k1' (logπ - logπ_ref), 'k3' (token-level exp(Δ)-Δ-1), or 'gspo' (sequence-level exp(mean Δ)-mean Δ-1)
 
     def __post_init__(self):
         TrainArgumentsMixin.__post_init__(self)
