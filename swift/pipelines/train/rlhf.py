@@ -120,7 +120,7 @@ class SwiftRLHF(SwiftSft):
                 continue
             if key == 'teacher' and args.rlhf_type != 'gkd':
                 continue
-            if key in {'value', 'teacher'} and args.rlhf_type in {'offline_ppo', 'offline_reinforce'}:
+            if key in {'value', 'teacher'} and args.rlhf_type in {'offline_ppo', 'offline_reinforce', 'offline_grpo'}:
                 continue
             model_key = 'reward' if key == 'value' else key
             model_type = getattr(args, f'{model_key}_model_type')
@@ -197,6 +197,7 @@ class SwiftRLHF(SwiftSft):
             'grpo': 'train',
             'offline_ppo': 'train',
             'offline_reinforce': 'train',
+            'offline_grpo': 'train',
         }
         self.template.set_mode(mode_mapping.get(args.rlhf_type, 'rlhf'))
 
@@ -212,6 +213,8 @@ class SwiftRLHF(SwiftSft):
             train_dataset, val_dataset = self._prepare_offline_ppo_dataset(train_dataset, val_dataset)
         elif args.rlhf_type == 'offline_reinforce':
             train_dataset, val_dataset = self._prepare_offline_reinforce_dataset(train_dataset, val_dataset)
+        elif args.rlhf_type == 'offline_grpo':
+            train_dataset, val_dataset = self._prepare_offline_grpo_dataset(train_dataset, val_dataset)
         return train_dataset, val_dataset
 
     def _map_weighted_reward_columns(self, dataset, component_keys, weights, out_key: str, log_tag: str):
@@ -395,6 +398,102 @@ class SwiftRLHF(SwiftSft):
         val_dataset = _compute_group_advantages(val_dataset)
         return train_dataset, val_dataset
 
+    def _prepare_offline_grpo_dataset(self, train_dataset, val_dataset):
+        """Prepare dataset for offline Dr. GRPO with length-normalised group advantages.
+
+        For each group of responses sharing the same prompt:
+            r̃_i = r_i / max(n_tokens_i, 1)      (length-normalised reward)
+            A_i  = r̃_i - mean_j(r̃_j)            (group-mean-centred advantage)
+
+        Response token counts are computed directly by tokenizing the raw answer text
+        (add_special_tokens=False), so no pre-computed length column is needed.
+        Group sizes are variable.  Singletons receive advantage = 0.
+        """
+        from collections import defaultdict
+        args = self.args
+        answer_key = args.offline_grpo_answer_key
+        reward_key = args.offline_grpo_reward_key
+        tokenizer = self.processor.tokenizer
+
+        def _add_answer_to_messages(example):
+            answer = example.get(answer_key)
+            if answer is not None:
+                messages = example.get('messages', [])
+                if messages and messages[-1]['role'] != 'assistant':
+                    messages = list(messages)
+                    messages.append({'role': 'assistant', 'content': str(answer)})
+                    example['messages'] = messages
+            return example
+
+        def _compute_dr_grpo_advantages(dataset):
+            if dataset is None:
+                return dataset
+
+            dataset = dataset.map(_add_answer_to_messages)
+            dataset = self._map_weighted_reward_columns(
+                dataset,
+                args.offline_grpo_reward_keys,
+                args.offline_grpo_reward_weights,
+                reward_key,
+                'Offline Dr. GRPO',
+            )
+
+            # Pre-compute token lengths for all answers in one pass.
+            all_answers = [str(dataset[idx].get(answer_key, '') or '') for idx in range(len(dataset))]
+            token_lengths = [
+                max(len(ids), 1)
+                for ids in tokenizer(all_answers, add_special_tokens=False)['input_ids']
+            ]
+
+            # Group samples by prompt (all turns before the last assistant message).
+            prompt_groups = defaultdict(list)
+            for idx in range(len(dataset)):
+                row = dataset[idx]
+                messages = row.get('messages', [])
+                prompt_parts = []
+                for msg in messages:
+                    if msg['role'] == 'assistant':
+                        break
+                    prompt_parts.append(f"{msg['role']}:{msg['content']}")
+                prompt_key = '||'.join(prompt_parts)
+                prompt_groups[prompt_key].append(idx)
+
+            advantages = [0.0] * len(dataset)
+            n_groups = len(prompt_groups)
+            n_multi = sum(1 for idxs in prompt_groups.values() if len(idxs) > 1)
+            n_singleton = n_groups - n_multi
+
+            for prompt_key, indices in prompt_groups.items():
+                if len(indices) < 2:
+                    # singleton → no contrastive signal, advantage stays 0
+                    continue
+
+                r_tilde = []
+                for idx in indices:
+                    r = float(dataset[idx].get(reward_key, 0.0))
+                    r_tilde.append(r / token_lengths[idx])
+
+                group_mean = sum(r_tilde) / len(r_tilde)
+                for idx, rt in zip(indices, r_tilde):
+                    advantages[idx] = rt - group_mean
+
+            logger.info(
+                f'Offline Dr. GRPO dataset stats: {len(dataset)} samples, '
+                f'{n_groups} unique prompts, {n_multi} groups with 2+ responses '
+                f'(variable group size), {n_singleton} singletons (advantage=0). '
+                f'Token lengths computed via tokenizer (add_special_tokens=False).')
+
+            def _set_advantage(example, idx):
+                example['_advantage'] = advantages[idx]
+                return example
+
+            dataset = dataset.map(_set_advantage, with_indices=True)
+            return dataset
+
+        train_dataset = _compute_dr_grpo_advantages(train_dataset)
+        val_dataset = _compute_dr_grpo_advantages(val_dataset)
+        return train_dataset, val_dataset
+
     def _prepare_chord_sft_dataset(self):
         # prepare expert sft dataset for chord
         args = self.args
@@ -416,7 +515,7 @@ class SwiftRLHF(SwiftSft):
         for key in ['ref', 'reward', 'value', 'teacher']:
             key = f'{key}_model'
             model = getattr(self, key, None)
-            if self.args.rlhf_type in ('offline_ppo', 'offline_reinforce'):
+            if self.args.rlhf_type in ('offline_ppo', 'offline_reinforce', 'offline_grpo'):
                 if key == 'ref_model' and model is not None:
                     trainer_kwargs[key] = model
                 continue
@@ -427,6 +526,8 @@ class SwiftRLHF(SwiftSft):
         if self.args.rlhf_type == 'offline_reinforce':
             trainer_kwargs['reward_key'] = self.args.offline_reinforce_reward_key
             trainer_kwargs['sample_weight_key'] = self.args.offline_reinforce_sample_weight_key
+        if self.args.rlhf_type == 'offline_grpo':
+            trainer_kwargs['reward_key'] = self.args.offline_grpo_reward_key
         if hasattr(self, 'reward_template'):
             trainer_kwargs['reward_template'] = self.reward_template
         if self.args.rlhf_type in ['grpo', 'gkd']:

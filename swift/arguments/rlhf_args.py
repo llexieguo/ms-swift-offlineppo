@@ -203,6 +203,40 @@ class OfflineReinforceArguments:
 
 
 @dataclass
+class OfflineGrpoArguments:
+    """Arguments for configuring offline Dr. GRPO training with pre-collected data.
+
+    Implements the Dr. GRPO advantage: r̃_i = r_i / |y_i|, A_i = r̃_i - mean(r̃_j),
+    where |y_i| is the response length (characters at prep time, used as a token-count
+    proxy). Variable group sizes are supported — no fixed num_generations required.
+
+    Args:
+        offline_grpo_kl_coef (float): KL penalty coefficient against the reference model.
+            Defaults to 0.05.
+        offline_grpo_whiten_advantages (bool): Divide advantages by their std at batch level.
+            Defaults to False (Dr. GRPO paper does not whiten after length normalisation).
+        offline_grpo_reward_key (str): Column name for the scalar reward. If
+            ``offline_grpo_reward_keys`` is set this column is overwritten by the weighted
+            sum. Defaults to 'reward'.
+        offline_grpo_answer_key (str): Column name for the pre-collected response text.
+            Defaults to 'answer'.
+        offline_grpo_reward_keys (Optional[str]): Comma-separated columns for composite reward.
+        offline_grpo_reward_weights (Optional[str]): Comma-separated weights for
+            ``offline_grpo_reward_keys``. Defaults to all 1.0.
+        offline_grpo_kl_estimator (str): KL estimator variant. 'k3' is the GRPO default
+            (always non-negative). 'k1' = logπ - logπ_ref. 'gspo' = sequence-level.
+            Defaults to 'k3'.
+    """
+    offline_grpo_kl_coef: float = 0.05
+    offline_grpo_whiten_advantages: bool = False
+    offline_grpo_reward_key: str = 'reward'
+    offline_grpo_answer_key: str = 'answer'
+    offline_grpo_reward_keys: Optional[str] = None
+    offline_grpo_reward_weights: Optional[str] = None
+    offline_grpo_kl_estimator: str = 'k3'
+
+
+@dataclass
 class GRPOArguments(GRPOArgumentsMixin):
     """A dataclass for configuring GRPO training.
 
@@ -249,7 +283,7 @@ class GRPOArguments(GRPOArgumentsMixin):
 
 @dataclass
 class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflinePPOArguments,
-                    OfflineReinforceArguments, RewardModelArguments, SftArguments):
+                    OfflineReinforceArguments, OfflineGrpoArguments, RewardModelArguments, SftArguments):
     """A dataclass holding arguments for Reinforcement Learning from Human Feedback.
 
     Args:
@@ -309,7 +343,7 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
             Defaults to None.
     """
     rlhf_type: Literal['dpo', 'orpo', 'simpo', 'kto', 'cpo', 'rm', 'ppo', 'offline_ppo', 'offline_reinforce',
-                       'grpo', 'gkd'] = 'dpo'
+                       'offline_grpo', 'grpo', 'gkd'] = 'dpo'
     ref_model: Optional[str] = None
     ref_adapters: List[str] = field(default_factory=list)
     ref_model_type: Optional[str] = field(
@@ -357,12 +391,17 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
             training_args['kl_coef'] = self.offline_reinforce_kl_coef
             training_args['whiten_advantages'] = self.offline_reinforce_whiten_advantages
             training_args['kl_estimator'] = self.offline_reinforce_kl_estimator
+        if self.rlhf_type == 'offline_grpo':
+            training_args['kl_coef'] = self.offline_grpo_kl_coef
+            training_args['whiten_advantages'] = self.offline_grpo_whiten_advantages
+            training_args['kl_estimator'] = self.offline_grpo_kl_estimator
 
     def __post_init__(self):
         self._process_loss_type()
         self._init_grpo()
         self._init_offline_ppo()
         self._init_offline_reinforce()
+        self._init_offline_grpo()
         self._init_rm()
         self._init_simpo()
         self._init_max_completion_length()
@@ -393,7 +432,7 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
             self.ref_adapters = [self.ref_adapters]
         if self.rlhf_type == 'grpo' and self.beta == 0.0:
             self.ref_model = None
-        elif self.rlhf_type in ['dpo', 'kto', 'ppo', 'offline_ppo', 'offline_reinforce', 'grpo'] \
+        elif self.rlhf_type in ['dpo', 'kto', 'ppo', 'offline_ppo', 'offline_reinforce', 'offline_grpo', 'grpo'] \
                 and self.tuner_type == 'full':
             self.ref_model = self.ref_model or self.model
             self.ref_model_type = self.ref_model_type or self.model_type
@@ -456,6 +495,22 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
                     raise ValueError(
                         f'offline_reinforce_reward_weights length ({len(rw)}) must match '
                         f'offline_reinforce_reward_keys ({len(rk)}).')
+
+    def _init_offline_grpo(self):
+        if self.rlhf_type != 'offline_grpo':
+            return
+        self.remove_unused_columns = False
+        logger.info(f'Setting args.remove_unused_columns: {self.remove_unused_columns}')
+        if self.offline_grpo_reward_keys is not None:
+            rk = [x.strip() for x in self.offline_grpo_reward_keys.split(',') if x.strip()]
+            self.offline_grpo_reward_keys = rk
+            if self.offline_grpo_reward_weights is not None:
+                rw = [float(x.strip()) for x in self.offline_grpo_reward_weights.split(',') if x.strip()]
+                self.offline_grpo_reward_weights = rw
+                if len(rw) != len(rk):
+                    raise ValueError(
+                        f'offline_grpo_reward_weights length ({len(rw)}) must match '
+                        f'offline_grpo_reward_keys ({len(rk)}).')
 
     def _init_grpo(self):
         if self.rlhf_type != 'grpo':
@@ -541,7 +596,7 @@ class RLHFArguments(TeacherModelArguments, GRPOArguments, PPOArguments, OfflineP
         self.max_completion_length = self.max_new_tokens = self.response_length = max_completion_length
 
     def _init_metric_for_best_model(self):
-        if self.rlhf_type not in {'ppo', 'offline_ppo', 'offline_reinforce', 'grpo'}:
+        if self.rlhf_type not in {'ppo', 'offline_ppo', 'offline_reinforce', 'offline_grpo', 'grpo'}:
             super()._init_metric_for_best_model()
         elif self.rlhf_type == 'grpo' and self.metric_for_best_model is None:
             self.metric_for_best_model = 'reward'

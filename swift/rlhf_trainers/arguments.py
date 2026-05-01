@@ -102,6 +102,17 @@ class OfflineReinforceConfig(TrainArgumentsMixin, HfTrainingArguments):
 
 
 @dataclass
+class OfflineGrpoConfig(TrainArgumentsMixin, HfTrainingArguments):
+    kl_coef: float = 0.05
+    whiten_advantages: bool = False
+    kl_estimator: str = 'k3'  # 'k1', 'k3' (GRPO-style, always >=0), or 'gspo'
+
+    def __post_init__(self):
+        TrainArgumentsMixin.__post_init__(self)
+        HfTrainingArguments.__post_init__(self)
+
+
+@dataclass
 class GKDConfig(RolloutTrainerArgumentsMixin, TrainArgumentsMixin, HfGKDConfig):
     sft_alpha: float = 0
 
